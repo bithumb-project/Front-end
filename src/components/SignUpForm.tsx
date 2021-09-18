@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -6,14 +6,19 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import AddIcon from '@mui/icons-material/Add';
+import PersonIcon from '@material-ui/icons/Person';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import styled from 'styled-components';
 
 const theme = createTheme();
 
 const SignUpForm: React.FC = (props) => {
+  const [image, setImage] = useState<string>('');
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -23,6 +28,50 @@ const SignUpForm: React.FC = (props) => {
       password: data.get('password'),
     });
   };
+
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newImage = event.target?.files?.[0];
+    if (newImage) {
+      setImage(URL.createObjectURL(newImage));
+    }
+  };
+
+  const handleImageClick = (event: React.MouseEvent<Element, MouseEvent>) => {
+    event.preventDefault();
+    inputFileRef.current?.click();
+  };
+
+  const BigAvatar = styled(Avatar)`
+    && {
+      width: 120px;
+      height: 120px;
+      margin-top: 24px;
+      position: relative;
+      overflow: visible;
+    }
+  `;
+
+  const PersonAvatar = styled(PersonIcon)`
+    && {
+      font-size: 70px;
+    }
+  `;
+
+  const AddIconSmall = styled(AddIcon)`
+    && {
+      color: white;
+      background-color: gray;
+      position: absolute;
+      border-radius: 50%;
+      transform: translate(200%, 150%);
+    }
+  `;
+
+  const ImageUpload = styled.img`
+    width : 100%;
+    height: 100%;
+    border-radius: 50%;
+  `;
 
   return (
     <ThemeProvider theme={theme}>
@@ -36,12 +85,23 @@ const SignUpForm: React.FC = (props) => {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          <BigAvatar>
+            <input
+            ref={inputFileRef}
+            hidden
+            type="file"
+            accept="image/*"
+            onChange={handleOnChange}
+            />
+            {image ? <ImageUpload src={image} onClick={handleImageClick} /> : <PersonAvatar onClick={(e)=>{handleImageClick(e)}}/>}
+            <AddIconSmall />
+          </BigAvatar>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
