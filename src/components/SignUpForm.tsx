@@ -29,7 +29,7 @@ const SignUpForm: React.FC = (props) => {
     });
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newImage = event.target?.files?.[0];
     if (newImage) {
       setImage(URL.createObjectURL(newImage));
@@ -85,9 +85,6 @@ const SignUpForm: React.FC = (props) => {
             alignItems: 'center',
           }}
         >
-          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar> */}
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
@@ -97,7 +94,7 @@ const SignUpForm: React.FC = (props) => {
             hidden
             type="file"
             accept="image/*"
-            onChange={handleOnChange}
+            onChange={handleFileOnChange}
             />
             {image ? <ImageUpload src={image} onClick={handleImageClick} /> : <PersonAvatar onClick={(e)=>{handleImageClick(e)}}/>}
             <AddIconSmall />
