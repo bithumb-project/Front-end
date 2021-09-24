@@ -1,17 +1,14 @@
 import React, { useRef, useState } from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import AddIcon from '@mui/icons-material/Add';
-import PersonIcon from '@material-ui/icons/Person';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload} from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import styled from 'styled-components';
 
 const theme = createTheme();
 
@@ -22,11 +19,6 @@ const SignUpForm: React.FC = (props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
   };
 
   const handleFileOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,38 +32,6 @@ const SignUpForm: React.FC = (props) => {
     event.preventDefault();
     inputFileRef.current?.click();
   };
-
-  const BigAvatar = styled(Avatar)`
-    && {
-      width: 120px;
-      height: 120px;
-      margin-top: 24px;
-      position: relative;
-      overflow: visible;
-    }
-  `;
-
-  const PersonAvatar = styled(PersonIcon)`
-    && {
-      font-size: 70px;
-    }
-  `;
-
-  const AddIconSmall = styled(AddIcon)`
-    && {
-      color: white;
-      background-color: gray;
-      position: absolute;
-      border-radius: 50%;
-      transform: translate(200%, 150%);
-    }
-  `;
-
-  const ImageUpload = styled.img`
-    width : 100%;
-    height: 100%;
-    border-radius: 50%;
-  `;
 
   return (
     <ThemeProvider theme={theme}>
@@ -164,6 +124,7 @@ const SignUpForm: React.FC = (props) => {
         </Box>
       </Container>
     </ThemeProvider>
-  )};
+  );
+}
 
 export default SignUpForm;

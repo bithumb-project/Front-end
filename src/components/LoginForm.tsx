@@ -14,11 +14,6 @@ const LoginForm:React.FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
   };
   
   const theme = createTheme();
@@ -83,6 +78,7 @@ const LoginForm:React.FC = () => {
         </Box>
       </Container>
     </ThemeProvider> 
-  )};
+  );
+}
 
 export default LoginForm;
