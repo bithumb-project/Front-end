@@ -1,40 +1,53 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import { useState } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { LayoutStyle } from './HeaderStyles';
+import HomeIcon from '@mui/icons-material/Home';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import {
+  AppBarStyle,
+  BoxStyle,
+  LayoutStyle,
+  ButtonStyle,
+  MenuItemStyle,
+  MenuStyle,
+} from './HeaderStyles';
 
 const Headers = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+    <BoxStyle>
+      <AppBarStyle>
         <LayoutStyle>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-          >
+          <ButtonStyle>
+            <HomeIcon />
+          </ButtonStyle>
+          <ButtonStyle onClick={handleClick}>코인판</ButtonStyle>
+          <MenuStyle anchorEl={anchorEl} open={open} onClose={handleClose}>
+            <MenuItemStyle onClick={handleClose}>Profile</MenuItemStyle>
+            <MenuItemStyle onClick={handleClose}>My account</MenuItemStyle>
+            <MenuItemStyle onClick={handleClose}>Logout</MenuItemStyle>
+          </MenuStyle>
+          <ButtonStyle onClick={handleClick}>선물/마진</ButtonStyle>
+          <ButtonStyle onClick={handleClick}>커뮤니티</ButtonStyle>
+          <ButtonStyle onClick={handleClick}>코인포럼</ButtonStyle>
+          <ButtonStyle onClick={handleClick}>거래소포럼</ButtonStyle>
+          <ButtonStyle onClick={handleClick}>갤러리</ButtonStyle>
+          <ButtonStyle onClick={handleClick}>거래소/차트</ButtonStyle>
+          <ButtonStyle onClick={handleClick}>공지</ButtonStyle>
+          <ButtonStyle>
             <MenuIcon />
-          </IconButton>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button color='inherit'>Login</Button>
+          </ButtonStyle>
         </LayoutStyle>
-      </AppBar>
-    </Box>
+      </AppBarStyle>
+    </BoxStyle>
   );
 };
 
