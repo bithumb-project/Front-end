@@ -6,7 +6,7 @@ import styles from '../styles/Home.module.css';
 const Home: NextPage = () => {
   return (
     <div>
-      <div>hi</div>
+      <div>index Page</div>
     </div>
   );
 };

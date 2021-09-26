@@ -6,8 +6,8 @@ import DefaultLayout from '../layout/DefaultLayout/DefaultLayout';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <StylesProvider injectFirst>
+      <GlobalStyles />
       <DefaultLayout>
-        <GlobalStyles />
         <Component {...pageProps} />
       </DefaultLayout>
     </StylesProvider>

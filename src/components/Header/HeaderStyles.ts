@@ -18,6 +18,7 @@ export const AppBarStyle = styled(AppBar)`
   height: 34px;
   display: flex;
   justify-content: center;
+  top: 103px;
   &.MuiPaper-root {
     box-shadow: none;
   }
@@ -37,11 +38,14 @@ export const LayoutStyle = styled(Toolbar)`
       /* color: #fddb27; */
       background-color: #104b85;
     }
+    &.MuiPaper-root {
+      top: 103px;
+    }
   }
 `;
 
 export const ButtonStyle = styled(Button)`
-  width: 120px;
+  width: 100%;
   height: 34px;
   color: #ffffff;
   border-radius: 0;
@@ -52,8 +56,12 @@ export const ButtonStyle = styled(Button)`
 `;
 
 export const MenuStyle = styled(Menu)`
+  &.MuiMenu-paper {
+    top: 103px;
+  }
   & .MuiPaper-root {
     border-radius: 0px;
+    top: 103px;
   }
   & .MuiList-root {
     padding-top: 0px;
@@ -65,6 +73,7 @@ export const MenuStyle = styled(Menu)`
 export const MenuItemStyle = styled(MenuItem)`
   font-size: 13px;
   justify-content: center;
+
   &:not(:last-child) {
     border-bottom: 1px solid #1976d1;
   }
