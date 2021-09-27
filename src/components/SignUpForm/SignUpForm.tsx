@@ -10,10 +10,23 @@ import Container from '@mui/material/Container';
 import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload} from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+interface UserInputData {
+  name: string;
+  email: string;
+  password: string;
+  comfirmPassword: string;
+  profileImage: string;
+}
 const theme = createTheme();
 
 const SignUpForm: React.FC = (props) => {
-  const [image, setImage] = useState<string>('');
+  const [userInputData, setUserInputData] = useState<UserInputData>({
+    name: '',
+    email: '',
+    password: '',
+    comfirmPassword: '',
+    profileImage:'',
+  });
   const inputFileRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -24,13 +37,28 @@ const SignUpForm: React.FC = (props) => {
   const handleFileOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newImage = event.target?.files?.[0];
     if (newImage) {
-      setImage(URL.createObjectURL(newImage));
+      setUserInputData({
+        ...userInputData,
+        profileImage: URL.createObjectURL(newImage)
+      })
     }
+  };
+
+  const handleInputOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+    setUserInputData({
+      ...userInputData,
+      [name]: value
+    })
   };
 
   const handleImageClick = (event: React.MouseEvent<Element, MouseEvent>) => {
     event.preventDefault();
     inputFileRef.current?.click();
+  };
+
+  const handleComparePassword = () => {
+    return userInputData.password !== userInputData.comfirmPassword ? true : false;
   };
 
   return (
@@ -56,7 +84,7 @@ const SignUpForm: React.FC = (props) => {
             accept="image/*"
             onChange={handleFileOnChange}
             />
-            {image ? <ImageUpload src={image} onClick={handleImageClick} /> : <PersonAvatar onClick={(e)=>{handleImageClick(e)}}/>}
+            {userInputData.profileImage ? <ImageUpload src={userInputData.profileImage} onClick={handleImageClick} /> : <PersonAvatar onClick={(e)=>{handleImageClick(e)}}/>}
             <AddIconSmall />
           </BigAvatar>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
@@ -64,12 +92,13 @@ const SignUpForm: React.FC = (props) => {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="name"
-                  name="Name"
+                  name="name"
                   required
                   fullWidth
                   id="Name"
                   label="Name"
                   autoFocus
+                  onChange={handleInputOnChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -79,7 +108,9 @@ const SignUpForm: React.FC = (props) => {
                   id="email"
                   label="Email"
                   name="email"
+                  type="email"
                   autoComplete="email"
+                  onChange={handleInputOnChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,17 +122,20 @@ const SignUpForm: React.FC = (props) => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleInputOnChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  name="comfirm-password"
+                  name="comfirmPassword"
                   label="Comfirm Password"
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleInputOnChange}
+                  error={handleComparePassword()}
                 />
               </Grid>
             </Grid>
