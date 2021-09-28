@@ -15,7 +15,7 @@ interface UserInputData {
   email: string;
   password: string;
   comfirmPassword: string;
-  profileImage: string;
+  profile: string;
 }
 const theme = createTheme();
 
@@ -25,7 +25,7 @@ const SignUpForm: React.FC = (props) => {
     email: '',
     password: '',
     comfirmPassword: '',
-    profileImage:'',
+    profile:'',
   });
   const inputFileRef = useRef<HTMLInputElement>(null);
 
@@ -39,7 +39,7 @@ const SignUpForm: React.FC = (props) => {
     if (newImage) {
       setUserInputData({
         ...userInputData,
-        profileImage: URL.createObjectURL(newImage)
+        profile: URL.createObjectURL(newImage)
       })
     }
   };
@@ -84,7 +84,7 @@ const SignUpForm: React.FC = (props) => {
             accept="image/*"
             onChange={handleFileOnChange}
             />
-            {userInputData.profileImage ? <ImageUpload src={userInputData.profileImage} onClick={handleImageClick} /> : <PersonAvatar onClick={(e)=>{handleImageClick(e)}}/>}
+            {userInputData.profile ? <ImageUpload src={userInputData.profile} onClick={handleImageClick} /> : <PersonAvatar onClick={(e)=>{handleImageClick(e)}}/>}
             <AddIconSmall />
           </BigAvatar>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
