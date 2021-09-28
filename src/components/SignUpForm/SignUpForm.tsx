@@ -11,7 +11,7 @@ import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload} from './SignUpFormS
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 interface UserInputData {
-  name: string;
+  nickname: string;
   email: string;
   password: string;
   comfirmPassword: string;
@@ -21,7 +21,7 @@ const theme = createTheme();
 
 const SignUpForm: React.FC = (props) => {
   const [userInputData, setUserInputData] = useState<UserInputData>({
-    name: '',
+    nickname: '',
     email: '',
     password: '',
     comfirmPassword: '',
@@ -92,11 +92,11 @@ const SignUpForm: React.FC = (props) => {
               <Grid item xs={12}>
                 <TextField
                   autoComplete="name"
-                  name="name"
+                  name="nickname"
                   required
                   fullWidth
-                  id="Name"
-                  label="Name"
+                  id="nickname"
+                  label="Nickname"
                   autoFocus
                   onChange={handleInputOnChange}
                 />
@@ -132,7 +132,7 @@ const SignUpForm: React.FC = (props) => {
                   name="comfirmPassword"
                   label="Comfirm Password"
                   type="password"
-                  id="password"
+                  id="comfirmPassword"
                   autoComplete="new-password"
                   onChange={handleInputOnChange}
                   error={handleComparePassword()}
