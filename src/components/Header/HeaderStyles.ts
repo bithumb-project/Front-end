@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AppBar, makeStyles } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
@@ -56,7 +56,7 @@ export const ButtonStyle = styled(Button)`
 `;
 
 export const MenuStyle = styled(Menu)`
-  &.MuiMenu-paper {
+  & .MuiMenu-paper {
     top: 103px;
   }
   & .MuiPaper-root {
@@ -67,6 +67,23 @@ export const MenuStyle = styled(Menu)`
     padding-top: 0px;
     padding-bottom: 0px;
     border-radius: 0px;
+  }
+`;
+
+export const MultipleMenuStyle = styled(Menu)`
+  & .MuiMenu-paper {
+    top: 103px;
+  }
+  & .MuiPaper-root {
+    border-radius: 0px;
+    top: 103px;
+  }
+  & .MuiList-root {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-radius: 0px;
+    display: flex;
+    flex-direction: row;
   }
 `;
 
