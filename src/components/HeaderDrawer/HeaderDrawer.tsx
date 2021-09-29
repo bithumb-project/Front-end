@@ -1,21 +1,7 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import { ButtonStyle, MenuItemStyle, MenuStyle } from './HeaderDrawerStyles';
+
 import MenuIcon from '@mui/icons-material/Menu';
-import {
-  DrawerStyle,
-  ButtonStyle,
-  MenuItemStyle,
-  MenuStyle,
-} from './HeaderDrawerStyles';
 
 const HeaderDrawer = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -35,7 +21,12 @@ const HeaderDrawer = () => {
       <ButtonStyle onClick={(e) => handleClick(e)}>
         <MenuIcon />
       </ButtonStyle>
-      <MenuStyle anchorEl={anchorEl} open={open} onClose={handleClose}>
+      <MenuStyle
+        style={{ left: -186 }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+      >
         <div>
           <MenuItemStyle onClick={handleClose}>코인판</MenuItemStyle>
           <MenuItemStyle onClick={handleClose}>코인정보</MenuItemStyle>

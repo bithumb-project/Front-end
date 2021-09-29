@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { AppBar, makeStyles } from '@mui/material';
+import styled from 'styled-components';
+import { AppBar } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';

@@ -9,10 +9,10 @@ import {
   MenuItemStyle,
   MenuStyle,
   MultipleMenuStyle,
-} from './HeaderStyles';
+} from './HeadersStyles';
 
 import HomeIcon from '@mui/icons-material/Home';
-import HeaderDrawer from './HeaderDrawer/HeaderDrawer';
+import HeaderDrawer from '../HeaderDrawer/HeaderDrawer';
 
 const Headers = () => {
   const router = useRouter();

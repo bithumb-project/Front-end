@@ -1,17 +1,6 @@
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
-import Drawer from '@mui/material/Drawer';
 import { Menu, MenuItem } from '@mui/material';
-
-export const AllMenu = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const DrawerStyle = styled(Drawer)`
-  &.MuiPaper-root {
-  }
-`;
 
 export const ButtonStyle = styled(Button)`
   width: 100%;
@@ -25,16 +14,6 @@ export const ButtonStyle = styled(Button)`
 `;
 
 export const MenuStyle = styled(Menu)`
-  & .coinforumMenu {
-    color: red;
-  }
-  & .MuiMenu-paper {
-    top: 103px;
-  }
-  & .MuiPaper-root {
-    border-radius: 0px;
-    top: 103px;
-  }
   & .MuiList-root {
     padding-top: 0px;
     padding-bottom: 0px;
@@ -45,7 +24,7 @@ export const MenuStyle = styled(Menu)`
 `;
 
 export const MenuItemStyle = styled(MenuItem)`
-  font-size: 13px;
+  font-size: 12px;
   justify-content: center;
 
   &:not(:last-child) {

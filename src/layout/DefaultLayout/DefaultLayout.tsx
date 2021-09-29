@@ -1,12 +1,14 @@
-import Headers from '../../components/Header/Header';
+import Headers from '../../components/Headers/Headers';
+import TabMenu from '../../components/TabMenu/TabMenu';
 
 type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   return (
     <div>
-      <h2>layouxt</h2>
+      <TabMenu />
       <Headers />
+      차트
       {children}
     </div>
   );
