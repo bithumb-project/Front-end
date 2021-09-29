@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload} from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useDispatch } from 'react-redux';
+import { signUp } from '../../service/userApi';
 
 interface UserInputData {
   nickname: string;
@@ -28,10 +30,19 @@ const SignUpForm: React.FC = (props) => {
     profile:'',
   });
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    if(handleComparePassword()) return;
+    const {nickname, email, password} = userInputData;
+    dispatch(
+      signUp({
+        nickname,
+        email,
+        password,
+      })
+    );
   };
 
   const handleFileOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,6 +121,7 @@ const SignUpForm: React.FC = (props) => {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  placeholder="Email(example@gamil.com)"
                   onChange={handleInputOnChange}
                 />
               </Grid>
@@ -122,6 +134,7 @@ const SignUpForm: React.FC = (props) => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  placeholder="영문, 숫자, 특수문자 조합 8~15자"
                   onChange={handleInputOnChange}
                 />
               </Grid>
@@ -150,7 +163,7 @@ const SignUpForm: React.FC = (props) => {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  Already have an account? Login
                 </Link>
               </Grid>
             </Grid>
