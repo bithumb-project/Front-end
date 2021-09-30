@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Tab, Tabs } from '@mui/material';
 
 export const Wrapper = styled.div`
