@@ -1,5 +1,4 @@
-import React from 'react';
-import Avatar from '@mui/material/Avatar';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,14 +8,39 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { User } from '../store/modules/user';
+import { useDispatch } from 'react-redux';
+import { login } from '../service/userApi';
+
+const theme = createTheme();
 
 const LoginForm:React.FC = () => {
+  const [loginData, setLoginData] = useState<User>({
+    email: '',
+    password: '',
+  })
+  const dispatch = useDispatch();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    if(loginData.email === '' || loginData.password === '') return;
+    const { email, password } = loginData;
+    // dispatch(
+    //   login({
+    //     email,
+    //     password
+    //   })
+    // );
+    console.log(`${email}, ${password}`);
   };
-  
-  const theme = createTheme();
+
+  const handleInputOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const {name, value} = event.target;
+    setLoginData({
+      ...loginData,
+      [name]: value
+    })
+  };
 
   return(
     <ThemeProvider theme={theme}>
@@ -31,7 +55,7 @@ const LoginForm:React.FC = () => {
           }}
         >
           <Typography component="h1" variant="h5">
-            Login
+            로그인
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -39,20 +63,23 @@ const LoginForm:React.FC = () => {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="이메일"
               name="email"
               autoComplete="email"
               autoFocus
+              placeholder="이메일(example@gmail.com)"
+              onChange={handleInputOnChange}
             />
             <TextField
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
+              label="비밀번호"
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleInputOnChange}
             />
             <Button
               type="submit"
@@ -65,12 +92,12 @@ const LoginForm:React.FC = () => {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  비밀번호를 잊어버리셨나요?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"계정이 없으신가요? 회원가입"}
                 </Link>
               </Grid>
             </Grid>

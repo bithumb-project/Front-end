@@ -35,7 +35,7 @@ const SignUpForm: React.FC = (props) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(handleComparePassword()) return;
-    const {nickname, email, password} = userInputData;
+    const { nickname, email, password } = userInputData;
     dispatch(
       signUp({
         nickname,
@@ -85,7 +85,7 @@ const SignUpForm: React.FC = (props) => {
           }}
         >
           <Typography component="h1" variant="h5">
-            Sign up
+            회원가입
           </Typography>
           <BigAvatar>
             <input
@@ -107,7 +107,7 @@ const SignUpForm: React.FC = (props) => {
                   required
                   fullWidth
                   id="nickname"
-                  label="Nickname"
+                  label="닉네임"
                   autoFocus
                   onChange={handleInputOnChange}
                 />
@@ -117,11 +117,11 @@ const SignUpForm: React.FC = (props) => {
                   required
                   fullWidth
                   id="email"
-                  label="Email"
+                  label="이메일"
                   name="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="Email(example@gamil.com)"
+                  placeholder="이메일(example@gmail.com)"
                   onChange={handleInputOnChange}
                 />
               </Grid>
@@ -130,7 +130,7 @@ const SignUpForm: React.FC = (props) => {
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  label="비밀번호"
                   type="password"
                   id="password"
                   autoComplete="new-password"
@@ -143,7 +143,7 @@ const SignUpForm: React.FC = (props) => {
                   required
                   fullWidth
                   name="comfirmPassword"
-                  label="Comfirm Password"
+                  label="비밀번호 확인"
                   type="password"
                   id="comfirmPassword"
                   autoComplete="new-password"
@@ -158,12 +158,12 @@ const SignUpForm: React.FC = (props) => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              계정 생성하기
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an account? Login
+                  이미 계정이 있으신가요? 로그인
                 </Link>
               </Grid>
             </Grid>
