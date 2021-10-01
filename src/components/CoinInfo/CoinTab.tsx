@@ -1,11 +1,14 @@
 import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { CoinTabContainer, ArrowButton, CoinCollapse } from './CoinTabStyles';
+import { CoinTabContainer, ArrowButton, CoinCollapse, ArrowButtonIcon, CoinBox } from './CoinTabStyles';
 
-const CoinTab: React.FC = (props) => {
+interface Props {
+  toggle: boolean;
+  toggleEvent: () => void;
+}
+
+const CoinTab: React.FC<Props> = ({toggle, toggleEvent}) => {
   const [value, setValue] = React.useState(0);
   const coins = ['BTC', 'ETH', 'LTC', 'ETC', 'XRP', 'XLM', 'BCH', 'EOS', 'ADA', 'DOGE'];
 
@@ -14,7 +17,7 @@ const CoinTab: React.FC = (props) => {
   };
   return (
     <CoinTabContainer>
-      <Box sx={{ width: '100%' }}>
+      <CoinBox sx={{ width: '100%' }}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -27,10 +30,10 @@ const CoinTab: React.FC = (props) => {
           <Tab value="two" label="Item Two" />
           <Tab value="three" label="Item Three" /> */}
         </Tabs>
-      </Box>
+      </CoinBox>
       <CoinCollapse>
-        <ArrowButton>
-          <ArrowDropDownIcon />
+        <ArrowButton onClick={toggleEvent}>
+          <ArrowButtonIcon className={toggle ? 'view' : ''}/>
         </ArrowButton>
       </CoinCollapse>
     </CoinTabContainer>

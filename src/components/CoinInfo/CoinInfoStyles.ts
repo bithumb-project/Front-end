@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import TableContainer from '@mui/material/TableContainer';
+import Paper from '@mui/material/Paper';
 
 export const StyledTableHead = styled(TableHead)`
   & .MuiTableCell-root {
@@ -17,3 +19,8 @@ export const StyledTableRow = styled(TableRow)`
   }
 `;
 
+export const StyledPaper = styled(Paper)`
+  &.closed {
+    display: none;
+  }
+`;

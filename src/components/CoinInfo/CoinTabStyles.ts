@@ -1,18 +1,30 @@
 import styled from 'styled-components';
+import Box from '@mui/material/Box';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 export const CoinTabContainer = styled.div`
   display: flex;
   align-items: center;
-  flex-basis: auto;
+  width: 100%;
 `;
+
+export const CoinBox = styled(Box)`
+  
+`;
+
+export const CoinCollapse = styled.div`
+  
+`;
+
 export const ArrowButton = styled.button`
   border: 0;
   outline: none;
   background: none;
   cursor: pointer;
-
-  
 `;
-export const CoinCollapse = styled.div`
 
+export const ArrowButtonIcon = styled(ArrowDropUpIcon)`
+  &.view {
+    transform: rotate(180deg);
+  }
 `;

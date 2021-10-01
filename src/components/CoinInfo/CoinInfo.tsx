@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
+import TableBody from '@mui/material/TableBody';
 import Paper from '@mui/material/Paper';
-import { StyledTableHead, StyledTableRow } from './CoinInfoStyles';
+import { StyledPaper, StyledTableHead, StyledTableRow } from './CoinInfoStyles';
 import CoinTab from './CoinTab';
 
 
 const CoinInfo: React.FC = (props) => {
+  const [toggleTable, setToggleTable] = useState<boolean>(false);
+
+  const handleToggleClick = () => {
+    setToggleTable(!toggleTable);
+  };
+  
   function createData(
     name: string,
     calories: number,
@@ -31,8 +36,8 @@ const CoinInfo: React.FC = (props) => {
   return (
     <>
       
-      <CoinTab />
-      <TableContainer component={Paper}>
+      <CoinTab toggle={toggleTable} toggleEvent={handleToggleClick}/>
+      <StyledPaper className={toggleTable ? 'closed' : ''}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <StyledTableHead>
             <TableRow>
@@ -57,7 +62,7 @@ const CoinInfo: React.FC = (props) => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </StyledPaper>
     </>
   );
 }
