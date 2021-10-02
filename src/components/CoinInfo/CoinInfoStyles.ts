@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
 
+export const Wrapper = styled.div`
+  
+`;
 export const StyledTableHead = styled(TableHead)`
   & .MuiTableCell-root {
     font-weight: 600;

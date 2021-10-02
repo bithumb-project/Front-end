@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import Table from '@mui/material/Table';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
-import Paper from '@mui/material/Paper';
-import { StyledPaper, StyledTableHead, StyledTableRow } from './CoinInfoStyles';
+import { Wrapper, StyledPaper, StyledTableHead, StyledTableRow } from './CoinInfoStyles';
 import CoinTab from './CoinTab';
 
 
@@ -34,8 +33,7 @@ const CoinInfo: React.FC = (props) => {
   ];
   
   return (
-    <>
-      
+    <Wrapper>
       <CoinTab toggle={toggleTable} toggleEvent={handleToggleClick}/>
       <StyledPaper className={toggleTable ? 'closed' : ''}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -63,7 +61,7 @@ const CoinInfo: React.FC = (props) => {
           </TableBody>
         </Table>
       </StyledPaper>
-    </>
+    </Wrapper>
   );
 }
 

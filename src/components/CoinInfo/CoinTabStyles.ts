@@ -6,14 +6,16 @@ export const CoinTabContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  justify-content: space-between;
 `;
 
 export const CoinBox = styled(Box)`
-  
+  & .MuiButtonBase-root {
+    min-width: 60px;
+  }
 `;
 
 export const CoinCollapse = styled.div`
-  
 `;
 
 export const ArrowButton = styled.button`
