@@ -27,7 +27,6 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
       <TabMenu />
       <Banners />
       <Headers />
-
       <SectionWrapper>
         <InfoSection>{children}</InfoSection>
         <SideSection>
