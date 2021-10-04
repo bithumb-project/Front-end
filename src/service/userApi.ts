@@ -30,9 +30,6 @@ export const signUp = createAsyncThunk(
   async (user: User, { rejectWithValue }) => {
     try {
       const response = await axios.post('/member', user);
-      if (response.data) {
-        // localStorage 에 유저 데이터, 토큰 저장
-      }
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -46,9 +43,33 @@ export const login = createAsyncThunk(
   async (user: User, { rejectWithValue }) => {
     try {
       const response = await axios.post('/login', user);
+      // localStorage 에 토큰, 유저 정보 저장하기
+      // localStorage.setItem('token', response.data.token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
+  }
+);
+
+// 로그인 유지
+export const loadUser = createAsyncThunk(
+  'user/load',
+  async () => {
+    if (localStorage['token']){
+      const user = {
+        // id: localStorage.getItem('id'),
+        // nickname: localStorage.getItem('nickname'),
+      }
+      return user;
+    }
+  }
+);
+
+// 로그아웃
+export const logout = createAsyncThunk(
+  'user/logout',
+  async () => {
+    // localStorage.removeItem('token');
   }
 );
