@@ -7,6 +7,12 @@ export const SectionWrapper = styled.div`
   margin: 10px 0;
 `;
 
+export const InfoWrapper = styled.div`
+  & > div {
+    margin: 10px;
+  }
+`;
+
 export const InfoSection = styled.div`
   border: 1px solid red;
   min-width: 828px;

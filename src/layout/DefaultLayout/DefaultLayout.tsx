@@ -4,6 +4,7 @@ import Headers from '../../components/Headers/Headers';
 import TabMenu from '../../components/TabMenu/TabMenu';
 import Grid from '@mui/material/Grid';
 import {
+  InfoWrapper,
   SectionWrapper,
   InfoSection,
   SideSection,
@@ -28,7 +29,14 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
       <Banners />
       <Headers />
       <SectionWrapper>
-        <InfoSection>{children}</InfoSection>
+        <InfoWrapper>
+          <InfoSection>
+            <h2>실시간 테이블 자리</h2>
+          </InfoSection>
+          <InfoSection>
+            <div>{children}</div>
+          </InfoSection>
+        </InfoWrapper>
         <SideSection>
           <Button variant='outlined' fullWidth>
             로그인
