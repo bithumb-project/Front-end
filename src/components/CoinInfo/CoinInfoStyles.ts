@@ -4,8 +4,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 export const Wrapper = styled.div`
-  
 `;
+
 export const StyledTableHead = styled(TableHead)`
   & .MuiTableCell-root {
     font-weight: 600;
@@ -25,4 +25,9 @@ export const StyledPaper = styled(Paper)`
   &.closed {
     display: none;
   }
+`;
+
+export const CurrencyUnit = styled.span`
+  margin-left: 4px;
+  color: #888;
 `;

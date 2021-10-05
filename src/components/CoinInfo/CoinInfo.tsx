@@ -3,7 +3,7 @@ import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
-import { Wrapper, StyledPaper, StyledTableHead, StyledTableRow } from './CoinInfoStyles';
+import { Wrapper, StyledPaper, StyledTableHead, StyledTableRow, CurrencyUnit } from './CoinInfoStyles';
 import CoinTab from './CoinTab';
 
 
@@ -25,11 +25,13 @@ const CoinInfo: React.FC = (props) => {
   }
   
   const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('빗썸', 159, 6.0, 24, 4.0),
+    createData('업비트', 237, 9.0, 37, 4.3),
+    createData('코인원', 262, 16.0, 24, 6.0),
+    createData('코빗', 305, 3.7, 67, 4.3),
+    createData('플라이어', 356, 16.0, 49, 3.9),
+    createData('바이낸스', 356, 16.0, 49, 3.9),
+    createData('파이넥스', 356, 16.0, 49, 3.9),
   ];
   
   return (
@@ -51,8 +53,8 @@ const CoinInfo: React.FC = (props) => {
             {rows.map((row) => (
               <StyledTableRow key={row.name}>
                 <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
+                <TableCell align="right">{row.calories}<CurrencyUnit>KRW</CurrencyUnit></TableCell>
+                <TableCell align="right">{row.fat}<CurrencyUnit>USD</CurrencyUnit></TableCell>
                 <TableCell align="right">{row.carbs}</TableCell>
                 <TableCell align="right">{row.protein}</TableCell>
                 <TableCell align="right">{row.protein}</TableCell>
