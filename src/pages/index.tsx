@@ -1,15 +1,11 @@
-import type { NextPage } from 'next'
-import LoginForm from '../components/LoginForm'
-import SignUpForm from '../components/SignUpForm/SignUpForm'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   return (
-    <div className={styles.container}>
-      {/* <LoginForm /> */}
-      <SignUpForm />
+    <div>
+      <div>index Page</div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
