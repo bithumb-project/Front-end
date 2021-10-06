@@ -1,17 +1,17 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 interface Data {
-  yesterdayDate: string;
+  today: string;
   page: number;
 }
 export const getNews = createAsyncThunk(
   'news/load',
   async (data: Data) => {
-    const {yesterdayDate, page} = data;
+    const {today, page} = data;
     const response = await axios.get('https://newsapi.org/v2/everything', {
       params:{
         q: 'bitcoin',
-        from: yesterdayDate,
+        from: today,
         sortBy: 'publishedAt',
         language: 'en',
         pageSize: 15,
