@@ -24,7 +24,6 @@ const Banners = () => {
         >
           BITHUMBUP
         </Typography>
-
         <StyledInputBase
           placeholder='검색어를 입력 해 주세요.'
           inputProps={{ 'aria-label': 'search' }}

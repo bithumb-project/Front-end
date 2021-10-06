@@ -15,13 +15,13 @@ export const InfoWrapper = styled.div`
 
 export const InfoSection = styled.div`
   border: 1px solid red;
-  max-width: 828px;
+  width: 828px;
   margin-right: 10px;
 `;
 
 export const SideSection = styled.div`
   border: 1px solid blue;
-  min-width: 200px;
+  width: 200px;
   display: grid;
   grid-gap: 10px;
 `;

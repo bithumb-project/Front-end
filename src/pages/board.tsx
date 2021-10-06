@@ -1,4 +1,6 @@
 import { useState, ChangeEvent } from 'react';
+import { useRouter } from 'next/router';
+
 import { Title } from '../../styles/pages/boardStyles';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -8,8 +10,14 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { useGetPostsQuery } from '../features/posts/postsSlice';
+import { useGetUsersQuery } from '../features/users/usersSlice';
 
 const Board = () => {
+  const { data: postsData, isLoading, refetch } = useGetPostsQuery();
+  const { data: userData } = useGetUsersQuery();
+  console.log('🚀 ~ file: board.tsx ~ line 15 ~ Board ~ data', userData);
+  const router = useRouter();
   interface Column {
     id: 'no' | 'name' | 'nickname' | 'createdAt' | 'view' | 'recommend';
     label: string;
@@ -19,7 +27,7 @@ const Board = () => {
   }
 
   const columns: readonly Column[] = [
-    { id: 'no', label: 'No', minWidth: 48 },
+    { id: 'no', label: 'No', minWidth: 42 },
     { id: 'name', label: '제목', minWidth: 417 },
     { id: 'nickname', label: '닉네임', minWidth: 91.75, align: 'center' },
     {
@@ -62,17 +70,26 @@ const Board = () => {
     return { no, name, nickname, createdAt, view, recommend };
   }
 
-  const rows = [
-    createData(
-      2,
-      '도지 대기 성층권 뚫는 기린 모가지 장대 양봉 발생',
-      'IN',
-      '2021.09.30',
-      16,
-      21
-    ),
-    createData(1, '도지만 오르겠냐 ㅋㅋㅋㅋㅋㅋ ', 'IN', '2021.09.30', 21, 33),
-  ];
+  const userName = (userId: number) => {
+    return postsData
+      ?.filter((element: any) => element.id === userId)
+      .map((name) => name.username)[0];
+  };
+
+  const rows =
+    postsData &&
+    [...postsData]
+      .sort((prev, curr) => curr.id - prev.id)
+      ?.map((element: any) =>
+        createData(
+          element.id,
+          element.title,
+          userName(element.userId),
+          new Date().toLocaleDateString(),
+          Math.floor(Math.random() * 100),
+          Math.floor(Math.random() * 10)
+        )
+      );
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(20);
@@ -89,60 +106,63 @@ const Board = () => {
   return (
     <>
       <Title>자유게시판</Title>
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
-          <Table stickyHeader aria-label='sticky table'>
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role='checkbox'
-                      tabIndex={-1}
-                      key={row.no}
-                      onClick={() => alert('hi')}
+      {isLoading && 'is Loading...'}
+      {!isLoading && postsData && (
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label='sticky table'>
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
                     >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[20, 50, 100]}
-          component='div'
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        tabIndex={-1}
+                        key={row.no}
+                        onClick={() => router.push(`board/${row.no}`)}
+                        sx={{ cursor: 'pointer' }}
+                      >
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[20, 50, 100]}
+            component='div'
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      )}
     </>
   );
 };
