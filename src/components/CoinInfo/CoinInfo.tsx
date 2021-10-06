@@ -15,23 +15,24 @@ const CoinInfo: React.FC = (props) => {
   };
   
   function createData(
-    name: string,
-    calories: number,
-    fat: number,
-    carbs: number,
-    protein: number,
+    exchangeName: string,
+    priceKrw: string,
+    priceUsd: string,
+    diff: string,
+    koreaPremium: string,
+    volume:string,
   ) {
-    return { name, calories, fat, carbs, protein };
+    return { exchangeName, priceKrw, priceUsd, diff, koreaPremium, volume };
   }
   
   const rows = [
-    createData('빗썸', 159, 6.0, 24, 4.0),
-    createData('업비트', 237, 9.0, 37, 4.3),
-    createData('코인원', 262, 16.0, 24, 6.0),
-    createData('코빗', 305, 3.7, 67, 4.3),
-    createData('플라이어', 356, 16.0, 49, 3.9),
-    createData('바이낸스', 356, 16.0, 49, 3.9),
-    createData('파이넥스', 356, 16.0, 49, 3.9),
+    createData('빗썸', '61,985,000', '52,118.85', '▲ 1,904,000', '+779,255', '3,717'),
+    createData('업비트', '61,966,000', '52,080.17', '▲ 273,000', '+774,843', '10,008'),
+    createData('코인원', '61,983,000', '52,133.15', '▲ 1,975,000', '+830,843', '1,285'),
+    createData('코빗', '62,001,000', '52,132.31', '▲ 2,031,000', '+799,843', '232'),
+    createData('플라이어', '61,075,629', '51,381.42', '▲ 2,608,758', '-', '2,839'),
+    createData('바이낸스', '61,180,959', '51,429.99', '▲ 2,516,049', '-', '51,606'),
+    createData('파이넥스', '61,206,184', '51,438.00', '▲ 2,426,174', '-', '6,330'),
   ];
   
   return (
@@ -51,13 +52,13 @@ const CoinInfo: React.FC = (props) => {
           </StyledTableHead>
           <TableBody>
             {rows.map((row) => (
-              <StyledTableRow key={row.name}>
-                <TableCell component="th" scope="row">{row.name}</TableCell>
-                <TableCell align="right">{row.calories}<CurrencyUnit>KRW</CurrencyUnit></TableCell>
-                <TableCell align="right">{row.fat}<CurrencyUnit>USD</CurrencyUnit></TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+              <StyledTableRow key={row.exchangeName}>
+                <TableCell component="th" scope="row">{row.exchangeName}</TableCell>
+                <TableCell align="right">{row.priceKrw}<CurrencyUnit>KRW</CurrencyUnit></TableCell>
+                <TableCell align="right">{row.priceUsd}<CurrencyUnit>USD</CurrencyUnit></TableCell>
+                <TableCell align="right">{row.diff}</TableCell>
+                <TableCell align="right">{row.koreaPremium}</TableCell>
+                <TableCell align="right">{row.volume}</TableCell>
               </StyledTableRow>
             ))}
           </TableBody>
