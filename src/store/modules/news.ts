@@ -14,6 +14,7 @@ const initialState = {
   articles: [],
   totalResults: 0,
   currentPage: 1,
+  pageCount: 1,
 }
 
 const newsSlice = createSlice({
@@ -26,6 +27,7 @@ const newsSlice = createSlice({
       .addCase(getNews.fulfilled, (state, action: PayloadAction<any>) => {
         state.articles = action.payload.articles;
         state.totalResults = action.payload.totalResults;
+        state.pageCount = Math.ceil(action.payload.totalResults / 15);
       })
       .addCase(getNews.rejected, (state) => {})
   }

@@ -19,17 +19,11 @@ export interface INewsItem {
 const NewsList: React.FC = () => {
   const dispatch = useDispatch();
   const news = useSelector((state: RootState) => state.news.articles);
-  const today = new Date().toString();
-  
 
   useEffect(()=> {
     dispatch(
-      getNews({
-        today,
-        page: 1,
-      })
+      getNews({ page: 1 })
     );
-    console.log(today);
   },[]);
 
   return (
