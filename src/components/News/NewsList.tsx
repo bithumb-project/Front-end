@@ -1,54 +1,42 @@
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
+import React, { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import NewsItem from './NewsItem';
 import NewsPagination from './NewsPagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { getNews } from '../../service/newsApi';
+import { RootState } from '../../store/modules/index';
 
-interface INewsItem {
+export interface INewsItem {
   id: number;
+  author: string;
   title: string;
-  date: string;
-  src: string;
+  publishedAt: string;
+  url: string;
+  urlToImage: string;
 }
 
 const NewsList: React.FC = () => {
-  const [news, setNews] = useState<INewsItem[]>([
-    {
-      id: 1,
-      title: 'news1',
-      date: '2021-09-23',
-      src: '',
-    },
-    {
-      id: 2,
-      title: 'news2',
-      date: '2021-09-23',
-      src: '',
-    },
-    {
-      id: 3,
-      title: 'news3',
-      date: '2021-09-23',
-      src: '',
-    },
-    {
-      id: 4,
-      title: 'news4',
-      date: '2021-09-23',
-      src: '',
-    },
-  ]);
+  const dispatch = useDispatch();
+  const news = useSelector((state: RootState) => state.news.articles);
+
+  useEffect(()=> {
+    dispatch(
+      getNews({
+        yesterdayDate: '2021-10-05',
+        page: 1,
+      })
+    );
+  },[]);
 
   return (
     <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
       <Container sx={{ py: 8 }} maxWidth="md">
         <Grid container spacing={4}>
-          {news.map((item) => (
+          {news.map((item, idx) => (
             <NewsItem
-            key={item.id}
+            key={idx}
             item={item} />
-            // <h1>ddd</h1>
           ))}
         </Grid>
       </Container>
