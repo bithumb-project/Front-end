@@ -3,6 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 interface Data {
   page: number;
 }
+const today = new Date().toISOString().substring(0,10);
 export const getNews = createAsyncThunk(
   'news/load',
   async (data: Data) => {
@@ -10,7 +11,7 @@ export const getNews = createAsyncThunk(
     const response = await axios.get('https://newsapi.org/v2/everything', {
       params:{
         q: 'bitcoin',
-        from: new Date().toString(),
+        from: today,
         sortBy: 'publishedAt',
         language: 'en',
         pageSize: 15,
