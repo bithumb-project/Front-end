@@ -2,13 +2,15 @@ import { useState, MouseEvent } from 'react';
 import Banners from '../../components/Banners/Banners';
 import Headers from '../../components/Headers/Headers';
 import TabMenu from '../../components/TabMenu/TabMenu';
-import Grid from '@mui/material/Grid';
+
 import {
   InfoWrapper,
   SectionWrapper,
   InfoSection,
   SideSection,
 } from './DefaultLayoutStyles';
+import Theme from '../../../styles/Theme';
+
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
 
@@ -41,7 +43,7 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
           <Button variant='outlined' fullWidth>
             로그인
           </Button>
-          <List sx={{ border: '1px solid #929292' }}>
+          <List sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}>
             <ListItemButton
               selected={selectedIndex === 0}
               onClick={(event: any) => handleListItemClick(event, 0)}
@@ -56,11 +58,11 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
             </ListItemButton>
           </List>
           <List
-            sx={{ border: '1px solid #929292' }}
+            sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}
             subheader={
               <ListSubheader
                 sx={{
-                  borderBottom: '1px solid #dadada',
+                  borderBottom: `1px solid ${Theme.palette.secondary.light}`,
                   fontWeight: 'bold',
                   background: '#f9f9f9 ',
                 }}
@@ -83,11 +85,11 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
             </ListItemButton>
           </List>
           <List
-            sx={{ border: '1px solid #929292' }}
+            sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}
             subheader={
               <ListSubheader
                 sx={{
-                  borderBottom: '1px solid #dadada',
+                  borderBottom: `1px solid ${Theme.palette.secondary.light}`,
                   fontWeight: 'bold',
                   background: '#f9f9f9 ',
                 }}

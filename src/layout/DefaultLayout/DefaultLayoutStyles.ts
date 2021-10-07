@@ -14,7 +14,7 @@ export const InfoWrapper = styled.div`
 `;
 
 export const InfoSection = styled.div`
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 828px;
   margin-right: 10px;
 `;

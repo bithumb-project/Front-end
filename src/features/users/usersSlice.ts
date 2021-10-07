@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { UsersResponse } from '../../types/usersType';
 
-interface Data {
-  data: any;
-}
+type Data = UsersResponse;
 
 export const usersSliceApi = createApi({
   reducerPath: 'usersSliceApi',

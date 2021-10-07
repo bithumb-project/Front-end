@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { PostsResponse, Response } from '../../types/postsType';
 
-interface Data {
-  data: any;
-}
+type Data = PostsResponse;
 
 export const postsSliceApi = createApi({
   reducerPath: 'postsSliceApi',
@@ -13,8 +12,10 @@ export const postsSliceApi = createApi({
     return {
       getPosts: builder.query<Data, void>({
         query: () => '/posts',
+        transformResponse: (data: PostsResponse) =>
+          data.map((post) => ({ ...post, view: 0, reommend: 0 })),
       }),
-      getPost: builder.query<Data, string>({
+      getPost: builder.query<Response, string>({
         query: (id) => `/posts/${id}`,
       }),
       putPost: builder.mutation<Data, any>({

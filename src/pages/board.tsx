@@ -1,7 +1,14 @@
 import { useState, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
+import { useAppDispatch } from '../app/hooks';
 
 import { Title } from '../../styles/pages/boardStyles';
+
+import { useGetPostsQuery } from '../features/posts/postsSlice';
+import { useGetUsersQuery } from '../features/users/usersSlice';
+import { Users } from '../types/usersType';
+import { getToday } from '../utils/Date';
+
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,21 +17,25 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useGetPostsQuery } from '../features/posts/postsSlice';
-import { useGetUsersQuery } from '../features/users/usersSlice';
+import { totalpostsData } from '../features/posts/postsReducer';
+
+interface Column {
+  id: 'no' | 'name' | 'nickname' | 'createdAt' | 'view' | 'recommend';
+  label: string;
+  minWidth?: number;
+  align?: 'center';
+  format?: (value: number) => string;
+}
 
 const Board = () => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+
   const { data: postsData, isLoading, refetch } = useGetPostsQuery();
   const { data: userData } = useGetUsersQuery();
-  console.log('🚀 ~ file: board.tsx ~ line 15 ~ Board ~ data', userData);
-  const router = useRouter();
-  interface Column {
-    id: 'no' | 'name' | 'nickname' | 'createdAt' | 'view' | 'recommend';
-    label: string;
-    minWidth?: number;
-    align?: 'center';
-    format?: (value: number) => string;
-  }
+
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
 
   const columns: readonly Column[] = [
     { id: 'no', label: 'No', minWidth: 42 },
@@ -50,30 +61,24 @@ const Board = () => {
     },
   ];
 
-  interface Data {
-    no: number;
-    name: string;
-    nickname: string;
-    createdAt: string;
-    view: number;
-    recommend: number;
-  }
-
-  function createData(
+  const createData = (
     no: number,
     name: string,
-    nickname: string,
     createdAt: string,
     view: number,
-    recommend: number
-  ): Data {
+    recommend: number,
+    nickname?: string
+  ) => {
     return { no, name, nickname, createdAt, view, recommend };
-  }
+  };
 
   const userName = (userId: number) => {
-    return postsData
-      ?.filter((element: any) => element.id === userId)
-      .map((name) => name.username)[0];
+    return (
+      userData &&
+      userData
+        ?.filter((element: Users) => element.id === userId)
+        .map((name) => name.username)[0]
+    );
   };
 
   const rows =
@@ -84,15 +89,12 @@ const Board = () => {
         createData(
           element.id,
           element.title,
-          userName(element.userId),
-          new Date().toLocaleDateString(),
+          getToday,
           Math.floor(Math.random() * 100),
-          Math.floor(Math.random() * 10)
+          Math.floor(Math.random() * 10),
+          userName(element?.userId)
         )
       );
-
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(20);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -126,7 +128,7 @@ const Board = () => {
               </TableHead>
               <TableBody>
                 {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
                       <TableRow
@@ -155,7 +157,7 @@ const Board = () => {
           <TablePagination
             rowsPerPageOptions={[20, 50, 100]}
             component='div'
-            count={rows.length}
+            count={rows?.length ?? 0}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
