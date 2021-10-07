@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { useGetNewsQuery } from '../../store/modules/newsSlice';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 import NewsItem from '../../components/News/NewsItem';
 import NewsPagination from '../../components/News/NewsPagination';
 
@@ -11,12 +13,14 @@ const Page = () => {
   const { page } = router.query;
   const { data, isLoading } = useGetNewsQuery(String(page));
   return (
-    <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+    <>
     {isLoading ? (
-        <>Loading...</>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <CircularProgress />
+      </Box>
       ) : data ? (
-        <>
-          <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Container sx={{ py: 4 }} maxWidth="md">
             <Grid container spacing={4}>
               {data.articles.map((item: any, idx: number) => (
                 <NewsItem
@@ -26,9 +30,9 @@ const Page = () => {
             </Grid>
           </Container>
           <NewsPagination page={Number(page)}/>
-        </>
+        </Container>
       ) : null}
-  </Container>
+      </>
   );
 }
 
