@@ -12,6 +12,7 @@ const Page = () => {
   const router = useRouter();
   const { page } = router.query;
   const { data, isLoading } = useGetNewsQuery(String(page));
+
   return (
     <>
     {isLoading ? (
@@ -29,7 +30,7 @@ const Page = () => {
               ))}
             </Grid>
           </Container>
-          <NewsPagination page={Number(page)}/>
+          <NewsPagination pageCounter={Math.ceil(data.totalResults / 15)} page={Number(page)}/>
         </Container>
       ) : null}
       </>
