@@ -1,20 +1,18 @@
 import React from 'react';
+import { useRouter } from "next/router";
 import Pagination from '@mui/material/Pagination';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/modules/store';
-import { getNews } from '../../service/newsApi';
 
-const NewsPagination: React.FC = (props) => {
-  const dispatch = useDispatch();
-  const pageCount = useSelector((state: RootState) => state.news.pageCount);
+interface Props {
+  page: number;
+}
 
+const NewsPagination: React.FC<Props> = ({page}) => {
+  const router = useRouter();
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    dispatch(
-      getNews({ page: value })
-    );
+    router.push(`/news/${value}`);
   };
   return (
-    <Pagination count={pageCount} onChange={handleChange} />
+    <Pagination count={10} page={page} onChange={handleChange} />
   );
 }
 

@@ -1,34 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { getNews } from '../../service/newsApi';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export interface Articles {
-  id: number;
-  author: string;
-  title: string;
-  publishedAt: string;
-  url: string;
-  urlToImage: string;
-}
+const today = new Date().toISOString().substring(0,10);
 
-const initialState = {
-  articles: [],
-  totalResults: 0,
-  currentPage: 1,
-  pageCount: 1,
-}
-
-export const newsSlice = createSlice({
-  name: 'news',
-  initialState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      .addCase(getNews.pending, (state) => {})
-      .addCase(getNews.fulfilled, (state, action: PayloadAction<any>) => {
-        state.articles = action.payload.articles;
-        state.totalResults = action.payload.totalResults;
-        state.pageCount = Math.ceil(action.payload.totalResults / 15);
-      })
-      .addCase(getNews.rejected, (state) => {})
-  }
+export const newsApi = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://newsapi.org/v2/'}),
+  reducerPath: 'newsApi',
+  endpoints: (builder) => ({
+    getNews: builder.query<any, string>({
+      query: (page) => {
+        return {
+          url: 'everything/',
+          params: {
+            q: 'bitcoin',
+            from: today,
+            sortBy: 'publishedAt',
+            language: 'en',
+            pageSize: 15,
+            page: page,
+            apiKey: 'd490e68d09374f989d8f45d6f74c6ca1'
+          }
+        }
+      }
+    }),
+  }),
 });
+
+export const { useGetNewsQuery } = newsApi;

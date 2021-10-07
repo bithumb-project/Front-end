@@ -1,11 +1,13 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { newsSlice } from './newsSlice';
+import { configureStore } from '@reduxjs/toolkit';
+import { newsApi } from './newsSlice';
 
 export const store = configureStore({
   reducer: {
-    news: newsSlice.reducer,
+    [newsApi.reducerPath]: newsApi.reducer,
   },
-  middleware: [...getDefaultMiddleware()]
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(newsApi.middleware)
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
