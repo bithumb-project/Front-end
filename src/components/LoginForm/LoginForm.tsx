@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { User } from '../../store/modules/user';
+import { User } from '../../store/modules/userSlice';
 import { useDispatch } from 'react-redux';
 import { login } from '../../service/userApi';
 import { MoveToSignUp } from './LoginFormStyles';
