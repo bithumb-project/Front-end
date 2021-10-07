@@ -1,11 +1,12 @@
-import { combineReducers } from '@reduxjs/toolkit';
-import userSlice from './userSlice';
-import newsSlice from './newsSlice';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { newsSlice } from './newsSlice';
 
-const rootReducer = combineReducers({
-  user: userSlice.reducer,
-  news: newsSlice.reducer,
+export const store = configureStore({
+  reducer: {
+    news: newsSlice.reducer,
+  },
+  middleware: [...getDefaultMiddleware()]
 });
 
-export type RootState = ReturnType<typeof rootReducer>;
-export default rootReducer;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

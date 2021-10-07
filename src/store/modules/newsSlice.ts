@@ -17,7 +17,7 @@ const initialState = {
   pageCount: 1,
 }
 
-const newsSlice = createSlice({
+export const newsSlice = createSlice({
   name: 'news',
   initialState,
   reducers: {},
@@ -32,5 +32,3 @@ const newsSlice = createSlice({
       .addCase(getNews.rejected, (state) => {})
   }
 });
-
-export default newsSlice;

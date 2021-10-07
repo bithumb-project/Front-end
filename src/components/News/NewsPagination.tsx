@@ -1,7 +1,7 @@
 import React from 'react';
 import Pagination from '@mui/material/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/modules';
+import { RootState } from '../../store/modules/store';
 import { getNews } from '../../service/newsApi';
 
 const NewsPagination: React.FC = (props) => {
