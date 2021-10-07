@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { User } from '../store/modules/user';
+import { User } from '../../store/modules/user';
 import { useDispatch } from 'react-redux';
-import { login } from '../service/userApi';
+import { login } from '../../service/userApi';
+import { MoveToSignUp } from './LoginFormStyles';
+import Link from 'next/link';
 
 const theme = createTheme();
 
@@ -25,13 +26,12 @@ const LoginForm:React.FC = () => {
     event.preventDefault();
     if(loginData.email === '' || loginData.password === '') return;
     const { email, password } = loginData;
-    // dispatch(
-    //   login({
-    //     email,
-    //     password
-    //   })
-    // );
-    console.log(`${email}, ${password}`);
+    dispatch(
+      login({
+        email,
+        password
+      })
+    );
   };
 
   const handleInputOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,15 +89,10 @@ const LoginForm:React.FC = () => {
             >
               Login
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  비밀번호를 잊어버리셨나요?
-                </Link>
-              </Grid>
+            <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"계정이 없으신가요? 회원가입"}
+                <Link href="/signup">
+                  <MoveToSignUp>계정이 없으신가요? 회원가입</MoveToSignUp>
                 </Link>
               </Grid>
             </Grid>

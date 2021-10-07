@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload} from './SignUpFormStyles';
+import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload } from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { signUp } from '../../service/userApi';
