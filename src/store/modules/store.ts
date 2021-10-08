@@ -3,7 +3,7 @@ import userSlice from './userSlice';
 
 export const store = configureStore({
   reducer: {
-    user: userSlice.reducer,
+    user: userSlice,
   },
   middleware: [...getDefaultMiddleware()]
 });

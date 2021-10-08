@@ -10,7 +10,7 @@ import Container from '@mui/material/Container';
 import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload } from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
-import { signUp } from '../../service/userApi';
+import { signUp } from '../../store/modules/userSlice';
 
 interface UserInputData {
   nickname: string;
