@@ -25,7 +25,7 @@ export const AddIconSmall = styled(AddIcon)`
     background-color: gray;
     position: absolute;
     border-radius: 50%;
-    transform: translate(200%, 150%);
+    transform: translate(300%, 150%);
   }
 `;
 
@@ -33,4 +33,11 @@ export const ImageUpload = styled.img`
   width : 100%;
   height: 100%;
   border-radius: 50%;
+`;
+
+export const MoveToLogin = styled.span`
+  color: #1976d2;
+  text-decoration: underline;
+  text-decoration-color: rgba(25,118,210,0.4);
+  cursor: pointer;
 `;

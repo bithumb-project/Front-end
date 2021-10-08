@@ -9,9 +9,10 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { User } from '../../store/modules/userSlice';
 import { useDispatch } from 'react-redux';
-import { login } from '../../service/userApi';
+import { login } from '../../store/modules/userSlice';
 import { MoveToSignUp } from './LoginFormStyles';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 const theme = createTheme();
 
@@ -21,6 +22,7 @@ const LoginForm:React.FC = () => {
     password: '',
   })
   const dispatch = useDispatch();
+  const router = useRouter()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -32,6 +34,7 @@ const LoginForm:React.FC = () => {
         password
       })
     );
+    router.push('/');
   };
 
   const handleInputOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -2,15 +2,16 @@ import React, { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload } from './SignUpFormStyles';
+import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload, MoveToLogin } from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { signUp } from '../../store/modules/userSlice';
+import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 interface UserInputData {
   nickname: string;
@@ -31,6 +32,7 @@ const SignUpForm: React.FC = (props) => {
   });
   const inputFileRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
+  const router = useRouter()
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,6 +45,7 @@ const SignUpForm: React.FC = (props) => {
         password,
       })
     );
+    router.push('/login');
   };
 
   const handleFileOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -162,8 +165,8 @@ const SignUpForm: React.FC = (props) => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  이미 계정이 있으신가요? 로그인
+                <Link href="/login">
+                  <MoveToLogin>이미 계정이 있으신가요? 로그인</MoveToLogin>
                 </Link>
               </Grid>
             </Grid>
