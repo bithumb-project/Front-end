@@ -17,7 +17,7 @@ export const newsApi = createApi({
             language: 'en',
             pageSize: 15,
             page: page,
-            apiKey: 'd490e68d09374f989d8f45d6f74c6ca1'
+            apiKey: process.env.NEXT_PUBLIC_NEWSAPI_KEY,
           }
         }
       }
