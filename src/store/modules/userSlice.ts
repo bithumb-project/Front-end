@@ -23,18 +23,19 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    signUp: (state, action: PayloadAction<User>) => {
+    signUpAction: (state, action: PayloadAction<User>) => {
       alert(`${action.payload.nickname} 님 회원가입 완료`);
     },
-    login: (state, action: PayloadAction<User>) => {
+    loginAction: (state, action: PayloadAction<User>) => {
       state.isLoggedIn = true;
       state.user.email = action.payload.email;
+      alert(`${action.payload.email} 님 로그인 완료`);
     },
-    logout: (state) => {
+    logoutAction: (state) => {
       state.isLoggedIn = false;
     },
   }
 });
 
-export const { signUp, login, logout } = userSlice.actions;
+export const { signUpAction, loginAction, logoutAction } = userSlice.actions;
 export default userSlice.reducer;

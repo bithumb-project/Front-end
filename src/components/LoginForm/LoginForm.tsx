@@ -8,11 +8,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { User } from '../../store/modules/userSlice';
-import { useDispatch } from 'react-redux';
-import { login } from '../../store/modules/userSlice';
 import { MoveToSignUp } from './LoginFormStyles';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
+import useUser from '../../store/modules/userHooks';
 
 const theme = createTheme();
 
@@ -21,19 +20,14 @@ const LoginForm:React.FC = () => {
     email: '',
     password: '',
   })
-  const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
+  const { login } = useUser();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(loginData.email === '' || loginData.password === '') return;
     const { email, password } = loginData;
-    dispatch(
-      login({
-        email,
-        password
-      })
-    );
+    login({ email, password });
     router.push('/');
   };
 

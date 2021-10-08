@@ -8,10 +8,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload, MoveToLogin } from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
-import { signUp } from '../../store/modules/userSlice';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
+import useUser from '../../store/modules/userHooks';
 
 interface UserInputData {
   nickname: string;
@@ -31,20 +30,14 @@ const SignUpForm: React.FC = (props) => {
     profile:'',
   });
   const inputFileRef = useRef<HTMLInputElement>(null);
-  const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
+  const { signUp } = useUser();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if(handleComparePassword()) return;
     const { nickname, email, password } = userInputData;
-    dispatch(
-      signUp({
-        nickname,
-        email,
-        password,
-      })
-    );
+    signUp({ nickname, email, password });
     router.push('/login');
   };
 
