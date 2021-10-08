@@ -20,20 +20,20 @@ const Page = () => {
         <CircularProgress />
       </Box>
       ) : data ? (
-        <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <Container sx={{ py: 4 }} maxWidth="md">
-            <Grid container spacing={4}>
-              {data.articles.map((item: any, idx: number) => (
-                <NewsItem
-                key={idx}
-                item={item} />
-              ))}
-            </Grid>
-          </Container>
-          <NewsPagination pageCounter={Math.ceil(data.totalResults / 15)} page={Number(page)}/>
+      <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Container sx={{ px: 0 ,py: 4 }} maxWidth="md">
+          <Grid container spacing={4}>
+            {data.articles.map((item: any, idx: number) => (
+              <NewsItem
+              key={idx}
+              item={item} />
+            ))}
+          </Grid>
         </Container>
+        <NewsPagination pageCounter={Math.ceil(data.totalResults / 15)} page={Number(page)}/>
+      </Container>
       ) : null}
-      </>
+    </>
   );
 }
 

@@ -5,10 +5,15 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Skeleton from '@mui/material/Skeleton';
-import { INewsItem } from './NewsList';
 
 interface Props {
-  item: INewsItem;
+  item: {
+    author: string;
+    title: string;
+    publishedAt: string;
+    url: string;
+    urlToImage: string;
+  }
 }
 const NewsItem: React.FC<Props> = ({item}) => {
   const { author, title, publishedAt, url, urlToImage } = item;
