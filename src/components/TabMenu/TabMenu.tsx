@@ -5,14 +5,17 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 import Link from 'next/link';
+import useUser from '../../store/modules/userHooks';
 
 const TabMenu = () => {
   const [value, setValue] = useState(0);
+  const { isLoggedIn } = useUser();
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -27,12 +30,20 @@ const TabMenu = () => {
         <TabStyle icon={<DarkModeIcon />} label='야간모드' />
       </TabsStyle>
       <TabsStyle value={value} onChange={handleChange}>
-        <Link href='/login'>
-          <TabStyle icon={<LoginIcon />} label='로그인' />
-        </Link>
-        <Link href='/signup'>
-          <TabStyle icon={<PermIdentityIcon />} label='회원가입' />
-        </Link>
+        { isLoggedIn ? (
+          <Link href='/logout'>
+          <TabStyle icon={<LogoutIcon />} label='로그아웃' />
+          </Link>
+          ) : (
+          <>
+            <Link href='/login'>
+              <TabStyle icon={<LoginIcon />} label='로그인' />
+            </Link>
+            <Link href='/signup'>
+              <TabStyle icon={<PermIdentityIcon />} label='회원가입' />
+            </Link>
+          </>)
+        }
         <FormControl fullWidth margin='dense'>
           <NativeSelect
             defaultValue={0}

@@ -5,7 +5,7 @@ import { signUpAction, loginAction, logoutAction } from './userSlice';
 import { User } from './userSlice';
 
 export default function useUser() {
-  const { isLoggedIn } = useSelector((state: RootState) => state.user);
+  const { user, isLoggedIn } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
   const signUp = useCallback((data: User) => {
@@ -20,5 +20,5 @@ export default function useUser() {
     dispatch(logoutAction());
   }, []);
 
-  return { isLoggedIn, signUp, login, logout };
+  return { user, isLoggedIn, signUp, login, logout };
 }

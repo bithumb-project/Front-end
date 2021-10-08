@@ -24,12 +24,11 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     signUpAction: (state, action: PayloadAction<User>) => {
-      alert(`${action.payload.nickname} 님 회원가입 완료`);
+      alert(`회원가입이 완료되었습니다. 로그인 해주세요.`);
     },
     loginAction: (state, action: PayloadAction<User>) => {
       state.isLoggedIn = true;
       state.user.email = action.payload.email;
-      alert(`${action.payload.email} 님 로그인 완료`);
     },
     logoutAction: (state) => {
       state.isLoggedIn = false;

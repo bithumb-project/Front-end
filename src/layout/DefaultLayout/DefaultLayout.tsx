@@ -2,6 +2,7 @@ import { useState, MouseEvent } from 'react';
 import Banners from '../../components/Banners/Banners';
 import Headers from '../../components/Headers/Headers';
 import TabMenu from '../../components/TabMenu/TabMenu';
+import UserBox from '../../components/UserBox/UserBox';
 import Grid from '@mui/material/Grid';
 import {
   InfoWrapper,
@@ -12,11 +13,13 @@ import {
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
 import Link from 'next/link';
+import useUser from '../../store/modules/userHooks';
 
 type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
+  const { isLoggedIn } = useUser();
 
   const handleListItemClick = (
     event: MouseEvent<HTMLDivElement, MouseEvent>,
@@ -39,11 +42,14 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
           </InfoSection>
         </InfoWrapper>
         <SideSection>
-          <Link href='/login'>
-            <Button variant='outlined' fullWidth>
-              로그인
-            </Button>
-          </Link>
+          { isLoggedIn ? (
+            <UserBox /> ): (
+            <Link href='/login'>
+              <Button variant='outlined' fullWidth>
+                로그인
+              </Button>
+            </Link>) 
+          }
           <List sx={{ border: '1px solid #929292' }}>
             <ListItemButton
               selected={selectedIndex === 0}
