@@ -37,6 +37,7 @@ const SignUpForm: React.FC = (props) => {
     event.preventDefault();
     if(handleComparePassword()) return;
     const { nickname, email, password } = userInputData;
+    if(nickname === '' || email === '' || password === '') return;
     signUp({ nickname, email, password });
     router.push('/login');
   };

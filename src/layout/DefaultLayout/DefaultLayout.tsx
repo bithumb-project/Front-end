@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
 import Banners from '../../components/Banners/Banners';
 import Headers from '../../components/Headers/Headers';
 import TabMenu from '../../components/TabMenu/TabMenu';
@@ -19,7 +19,12 @@ type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
-  const { isLoggedIn } = useUser();
+  const { isLoggedIn, loadUser } = useUser();
+
+  useEffect(()=> {
+    if(!localStorage.getItem('loginUser')) return;
+    loadUser(localStorage.getItem('loginUser'));
+  }, []);
 
   const handleListItemClick = (
     event: MouseEvent<HTMLDivElement, MouseEvent>,

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store';
-import { signUpAction, loginAction, logoutAction } from './userSlice';
+import { signUpAction, loginAction, logoutAction, loadUserAction } from './userSlice';
 import { User } from './userSlice';
 
 export default function useUser() {
@@ -20,5 +20,9 @@ export default function useUser() {
     dispatch(logoutAction());
   }, []);
 
-  return { user, isLoggedIn, signUp, login, logout };
+  const loadUser = useCallback((data: any) => {
+    dispatch(loadUserAction(data));
+  }, []);
+
+  return { user, isLoggedIn, signUp, login, logout, loadUser };
 }

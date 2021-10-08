@@ -29,12 +29,18 @@ const userSlice = createSlice({
     loginAction: (state, action: PayloadAction<User>) => {
       state.isLoggedIn = true;
       state.user.email = action.payload.email;
+      localStorage.setItem('loginUser', action.payload.email);
     },
     logoutAction: (state) => {
       state.isLoggedIn = false;
+      localStorage.removeItem('loginUser');
+    },
+    loadUserAction: (state, action: any) => {
+      state.isLoggedIn = true;
+      state.user.email = action.payload;
     },
   }
 });
 
-export const { signUpAction, loginAction, logoutAction } = userSlice.actions;
+export const { signUpAction, loginAction, logoutAction, loadUserAction } = userSlice.actions;
 export default userSlice.reducer;
