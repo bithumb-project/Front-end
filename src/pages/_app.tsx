@@ -4,7 +4,6 @@ import GlobalStyles from '../../styles/GlobalStyles';
 import DefaultLayout from '../layout/DefaultLayout/DefaultLayout';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/Theme';
-import wrapper from '../store/configureStore'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -19,4 +18,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;

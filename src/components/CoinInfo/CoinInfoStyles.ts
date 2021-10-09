@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import TableCell from '@mui/material/TableCell';
 
 export const Wrapper = styled.div`
 `;
@@ -30,4 +31,14 @@ export const StyledPaper = styled(Paper)`
 export const CurrencyUnit = styled.span`
   margin-left: 4px;
   color: #888;
+`;
+
+export const Diff = styled(TableCell)`
+  text-align: right;
+  color: #fb1e0c;
+`;
+
+export const KoreaPremium = styled(TableCell)`
+  text-align: right;
+  color: #2b8f28;
 `;

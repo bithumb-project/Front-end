@@ -3,15 +3,20 @@ import Table from '@mui/material/Table';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import TableBody from '@mui/material/TableBody';
-import { Wrapper, StyledPaper, StyledTableHead, StyledTableRow, CurrencyUnit } from './CoinInfoStyles';
+import { Wrapper, StyledPaper, StyledTableHead, StyledTableRow, CurrencyUnit, Diff, KoreaPremium } from './CoinInfoStyles';
 import CoinTab from './CoinTab';
 
 
 const CoinInfo: React.FC = (props) => {
   const [toggleTable, setToggleTable] = useState<boolean>(false);
+  const [currencyUnit, setCurrencyUnit] = useState<string>('BTC');
 
   const handleToggleClick = () => {
     setToggleTable(!toggleTable);
+  };
+
+  const handleUnitClick = (unit: string) => {
+    setCurrencyUnit(unit);
   };
   
   function createData(
@@ -37,12 +42,12 @@ const CoinInfo: React.FC = (props) => {
   
   return (
     <Wrapper>
-      <CoinTab toggle={toggleTable} toggleEvent={handleToggleClick}/>
+      <CoinTab toggle={toggleTable} toggleEvent={handleToggleClick} clickEvent={handleUnitClick} />
       <StyledPaper className={toggleTable ? 'closed' : ''}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <StyledTableHead>
             <TableRow>
-              <TableCell align="right">거래소</TableCell>
+              <TableCell align="center">거래소</TableCell>
               <TableCell align="right">실시간 시세(KRW)&nbsp;</TableCell>
               <TableCell align="right">실시간 시세(USD)&nbsp;</TableCell>
               <TableCell align="right">24시간 변동률&nbsp;</TableCell>
@@ -53,12 +58,12 @@ const CoinInfo: React.FC = (props) => {
           <TableBody>
             {rows.map((row) => (
               <StyledTableRow key={row.exchangeName}>
-                <TableCell component="th" scope="row">{row.exchangeName}</TableCell>
+                <TableCell component="th" scope="row" align="center">{row.exchangeName}</TableCell>
                 <TableCell align="right">{row.priceKrw}<CurrencyUnit>KRW</CurrencyUnit></TableCell>
                 <TableCell align="right">{row.priceUsd}<CurrencyUnit>USD</CurrencyUnit></TableCell>
-                <TableCell align="right">{row.diff}</TableCell>
-                <TableCell align="right">{row.koreaPremium}</TableCell>
-                <TableCell align="right">{row.volume}</TableCell>
+                <Diff>{row.diff}</Diff>
+                <KoreaPremium>{row.koreaPremium}</KoreaPremium>
+                <TableCell align="right">{row.volume}<CurrencyUnit>{currencyUnit}</CurrencyUnit></TableCell>
               </StyledTableRow>
             ))}
           </TableBody>

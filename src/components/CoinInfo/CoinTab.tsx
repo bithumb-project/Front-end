@@ -6,14 +6,16 @@ import { CoinTabContainer, ArrowButton, CoinCollapse, ArrowButtonIcon, CoinBox }
 interface Props {
   toggle: boolean;
   toggleEvent: () => void;
+  clickEvent: (unit: string) => void;
 }
 
-const CoinTab: React.FC<Props> = ({toggle, toggleEvent}) => {
-  const [value, setValue] = React.useState(0);
+const CoinTab: React.FC<Props> = ({toggle, toggleEvent, clickEvent}) => {
+  const [value, setValue] = React.useState('BTC');
   const coins = ['BTC', 'ETH', 'LTC', 'ETC', 'XRP', 'XLM', 'BCH', 'EOS', 'ADA', 'DOGE'];
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
+    clickEvent(newValue);
   };
   return (
     <CoinTabContainer>
@@ -24,11 +26,8 @@ const CoinTab: React.FC<Props> = ({toggle, toggleEvent}) => {
           aria-label="wrapped label tabs example"
         >
           {coins.map((coin, i) => (
-            <Tab key={i} value={i} label={coin}></Tab>
+            <Tab key={i} value={coin} label={coin}></Tab>
           ))}
-          {/* <Tab value="one" label="BTC" wrapped />
-          <Tab value="two" label="Item Two" />
-          <Tab value="three" label="Item Three" /> */}
         </Tabs>
       </CoinBox>
       <CoinCollapse>
