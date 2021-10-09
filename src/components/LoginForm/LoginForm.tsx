@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { User } from '../../store/modules/userSlice';
+import { Button, CssBaseline, TextField, Grid, Box, Typography, Container } from '@mui/material';
+import { User } from '../../types/authType';
 import { MoveToSignUp } from './LoginFormStyles';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import useUser from '../../store/modules/userHooks';
+import useAuth from '../../features/auth/authHooks';
 
 const LoginForm:React.FC = () => {
   const [loginData, setLoginData] = useState<User>({
@@ -18,7 +12,7 @@ const LoginForm:React.FC = () => {
     password: '',
   })
   const router = useRouter();
-  const { login } = useUser();
+  const { login } = useAuth();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -13,13 +13,13 @@ import {
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
 import Link from 'next/link';
-import useUser from '../../store/modules/userHooks';
+import useAuth from '../../features/auth/authHooks';
 
 type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
-  const { isLoggedIn, loadUser } = useUser();
+  const { isLoggedIn, loadUser } = useAuth();
 
   useEffect(()=> {
     if(!localStorage.getItem('loginUser')) return;

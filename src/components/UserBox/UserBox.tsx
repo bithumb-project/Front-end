@@ -1,5 +1,5 @@
 import React from 'react';
-import useUser from '../../store/modules/userHooks';
+import useUser from '../../features/auth/authHooks';
 import { Wrapper, UserInfo, UserEmail, UserContents, LogoutBtn, ContentsBtn } from './UserBoxStyles';
 import { Avatar } from '@mui/material';
 

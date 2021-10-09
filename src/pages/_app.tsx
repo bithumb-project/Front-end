@@ -5,7 +5,7 @@ import DefaultLayout from '../layout/DefaultLayout/DefaultLayout';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../../styles/Theme';
 import { Provider } from 'react-redux';
-import { store } from '../store/modules/store';
+import { store } from '../app/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

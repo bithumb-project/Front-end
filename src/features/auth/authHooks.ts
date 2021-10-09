@@ -1,12 +1,11 @@
 import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './store';
-import { signUpAction, loginAction, logoutAction, loadUserAction } from './userSlice';
-import { User } from './userSlice';
+import { signUpAction, loginAction, logoutAction, loadUserAction } from './authSlice';
+import { User } from '../../types/authType';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 
-export default function useUser() {
-  const { user, isLoggedIn } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+export default function useAuth() {
+  const { user, isLoggedIn } = useAppSelector(state => state.auth);
+  const dispatch = useAppDispatch();
 
   const signUp = useCallback((data: User) => {
     dispatch(signUpAction(data));

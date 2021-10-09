@@ -1,23 +1,10 @@
 import React, { useRef, useState } from 'react';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import { Button, CssBaseline, TextField, Grid, Box, Typography, Container } from '@mui/material';
 import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload, MoveToLogin } from './SignUpFormStyles';
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import useUser from '../../store/modules/userHooks';
-
-interface UserInputData {
-  nickname: string;
-  email: string;
-  password: string;
-  comfirmPassword: string;
-  profile: string;
-}
+import useAuth from '../../features/auth/authHooks';
+import { UserInputData } from '../../types/authType';
 
 const SignUpForm: React.FC = (props) => {
   const [userInputData, setUserInputData] = useState<UserInputData>({
@@ -29,7 +16,7 @@ const SignUpForm: React.FC = (props) => {
   });
   const inputFileRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { signUp } = useUser();
+  const { signUp } = useAuth();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
