@@ -1,19 +1,30 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { PostsResponse, Response } from '../../types/postsType';
+import {
+  TransformedPostsResponse,
+  PostsResponse,
+  Response,
+} from '../../types/postsType';
 
-type Data = PostsResponse;
+type Data = TransformedPostsResponse;
 
 export const postsSliceApi = createApi({
   reducerPath: 'postsSliceApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://jsonplaceholder.typicode.com',
   }),
+
   endpoints(builder) {
     return {
       getPosts: builder.query<Data, void>({
         query: () => '/posts',
-        transformResponse: (data: PostsResponse) =>
-          data.map((post) => ({ ...post, view: 0, reommend: 0 })),
+        transformResponse: (data: TransformedPostsResponse) =>
+          data.map((post) => ({
+            ...post,
+            view: Math.floor(Math.random() * 100),
+            recommend: Math.floor(Math.random() * 10),
+            blame: Math.floor(Math.random() * 10),
+            declare: false,
+          })),
       }),
       getPost: builder.query<Response, string>({
         query: (id) => `/posts/${id}`,
@@ -22,7 +33,7 @@ export const postsSliceApi = createApi({
         query: ({ id, ...patch }) => ({
           url: `posts/${id}`,
           method: 'PUT',
-          body: patch,
+          body: patch.updateBody,
         }),
       }),
     };

@@ -1,9 +1,9 @@
 import type { AppProps } from 'next/app';
 import { StylesProvider } from '@mui/styles';
-import GlobalStyles from '../../styles/GlobalStyles';
+import GlobalStyles from '../styles/GlobalStyles';
 import DefaultLayout from '../layout/DefaultLayout/DefaultLayout';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from '../../styles/Theme';
+import theme from '../styles/Theme';
 import { store } from '../app/store';
 import { Provider } from 'react-redux';
 

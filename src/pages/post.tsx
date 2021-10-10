@@ -1,14 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
   useGetPostQuery,
   useGetPostsQuery,
-} from '../../../features/posts/postsSlice';
-
+  usePutPostMutation,
+} from '../features/posts/postsSlice';
 import {
+  Title,
+  AddText,
+  AddTitle,
   Header,
   PostInfoWrapper,
   Wrapper,
@@ -19,37 +21,52 @@ import {
   PostButtonWrapper,
   PostButton,
   SeparationLine,
-} from '../../../styles/pages/BoardIdPageStyles';
+} from '../styles/pages/PostPageStyles';
+import {
+  addPostData,
+  blameCount,
+  isDeclare,
+  recommendCount,
+} from '../features/posts/postsReducer';
 
-import { getToday } from '../../../utils/Date';
+import {
+  getHundredsRandomNumber,
+  getTenRandomNumber,
+  getToday,
+} from '../utils/Date';
 
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import WbTwilightIcon from '@mui/icons-material/WbTwilight';
-import Comments from '../../../components/Comments/Comments';
-import {
-  blameCount,
-  isDeclare,
-  recommendCount,
-} from '../../../features/posts/postsReducer';
+import Comments from '../components/Comments/Comments';
+import { Button } from '@mui/material';
 
-const Index = () => {
+const post = () => {
+  const [putPost] = usePutPostMutation();
+
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
   const router = useRouter();
-  const { id } = router.query;
   const dispatch = useAppDispatch();
 
+  const id = getTenRandomNumber;
+
+  useEffect(() => {
+    dispatch(addPostData({ id: getHundredsRandomNumber, userId: id }));
+  }, []);
+
+  const { data: postsData } = useGetPostsQuery();
+
   const { data: post, isLoading } = useGetPostQuery(String(id));
+
   const commentCount = useAppSelector(
     ({ commentsState }) => commentsState.data.length
   );
 
-  const { data: postsData } = useGetPostsQuery();
-  console.log('🚀 ~ file: index.tsx ~ line 35 ~ Index ~ postsData', postsData);
-
   const count =
     postsData && postsData?.filter((element) => element.id === Number(id))[0];
-
-  console.log('jhi', count);
 
   useEffect(() => {
     dispatch(recommendCount(count?.recommend));
@@ -60,17 +77,82 @@ const Index = () => {
   const recommend = useAppSelector(({ postsState }) => postsState.recommend);
   const blame = useAppSelector(({ postsState }) => postsState.blame);
   const declare = useAppSelector(({ postsState }) => postsState.declare);
+  const updateBody = useAppSelector(({ postsState }) => postsState.post);
+  const updateId = useAppSelector(({ postsState }) => postsState.post.id);
+  console.log('🚀 ~ file: post.tsx ~ line 80 ~ post ~ updateBody', updateId);
+
+  const data = {
+    userId: 10,
+    id: 100,
+    title: 'ㅋㅋㅋ',
+    body: 'ㅋㅋㅋㅋㅋㅋㅋ',
+  };
+
+  const addPost = async () => {
+    try {
+      if (updateBody && !isLoading) {
+        const test = await putPost({
+          id,
+          updateBody,
+        }).unwrap();
+        setIsSuccess(true);
+        console.log(test);
+      }
+    } catch (error) {
+      alert(error);
+      setIsSuccess(false);
+    }
+  };
 
   return (
-    <>
+    <div>
+      <Title>새로운 글 작성하기</Title>
+      {!isSuccess && (
+        <>
+          <AddTitle
+            aria-label='제목'
+            minRows={3}
+            placeholder='제목을 입력하세요.'
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              (e.key === 'Enter' || e.key === 'Tab') &&
+                dispatch(addPostData({ title: title }));
+            }}
+          />
+          <AddText
+            aria-label='내용'
+            minRows={20}
+            placeholder='내용을 입력하세요.'
+            onChange={(e) => {
+              setBody(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              (e.key === 'Enter' || e.key === 'Tab') &&
+                dispatch(addPostData({ body: body }));
+            }}
+          />
+          <Button
+            variant='contained'
+            fullWidth
+            disabled={title === '' && body === ''}
+            onClick={() => {
+              addPost();
+            }}
+          >
+            등록하기
+          </Button>
+        </>
+      )}
       {isLoading && 'is Loading...'}
-      {!isLoading && post && (
+      {updateBody && post && isSuccess && (
         <Wrapper>
-          <Header>{post.title}</Header>
+          <Header>{updateBody.title}</Header>
           <PostInfoWrapper>
             <UserInfo>
               <UserInfoElement borderDisplay='right'>
-                {post.userId}
+                {updateBody.userId}
               </UserInfoElement>
               <UserInfoElement borderDisplay='right'>
                 추천 {recommend}
@@ -89,7 +171,7 @@ const Index = () => {
               </UserInfoElement>
             </CreatedInfo>
           </PostInfoWrapper>
-          <PostBody>{post.body}</PostBody>
+          <PostBody>{updateBody.body}</PostBody>
           <PostButtonWrapper>
             <PostButton
               variant='outlined'
@@ -121,13 +203,10 @@ const Index = () => {
               신고 {declare ? 1 : 0}
             </PostButton>
           </PostButtonWrapper>
-          <SeparationLine />
-          <Header>Comments</Header>
-          <Comments id={String(id)} />
         </Wrapper>
       )}
-    </>
+    </div>
   );
 };
 
-export default Index;
+export default post;

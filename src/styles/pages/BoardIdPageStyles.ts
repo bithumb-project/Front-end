@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import Theme from '../../styles/Theme';
+import Theme from '../Theme';
 import { Button } from '@mui/material';
 
 export const Wrapper = styled.div`

@@ -1,8 +1,13 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { useRouter } from 'next/router';
-import { useAppDispatch } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
-import { Title } from '../../styles/pages/boardStyles';
+import {
+  Title,
+  StyledInputBase,
+  Wrapper,
+  SearchWrapper,
+} from '../styles/pages/BoardPageStyles';
 
 import { useGetPostsQuery } from '../features/posts/postsSlice';
 import { useGetUsersQuery } from '../features/users/usersSlice';
@@ -17,7 +22,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { totalpostsData } from '../features/posts/postsReducer';
+import { Button } from '@mui/material';
 
 interface Column {
   id: 'no' | 'name' | 'nickname' | 'createdAt' | 'view' | 'recommend';
@@ -44,19 +49,19 @@ const Board = () => {
     {
       id: 'createdAt',
       label: '등록일',
-      minWidth: 91.75,
+      minWidth: 95,
       align: 'center',
     },
     {
       id: 'view',
       label: '조회',
-      minWidth: 91.75,
+      minWidth: 91.7,
       align: 'center',
     },
     {
       id: 'recommend',
       label: '추천',
-      minWidth: 91.75,
+      minWidth: 91.7,
       align: 'center',
     },
   ];
@@ -129,13 +134,15 @@ const Board = () => {
               <TableBody>
                 {rows
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
+                  .map((row: any) => {
                     return (
                       <TableRow
                         hover
                         tabIndex={-1}
                         key={row.no}
-                        onClick={() => router.push(`board/${row.no}`)}
+                        onClick={() => {
+                          router.push(`board/${row.no}`);
+                        }}
                         sx={{ cursor: 'pointer' }}
                       >
                         {columns.map((column) => {
@@ -165,6 +172,26 @@ const Board = () => {
           />
         </Paper>
       )}
+      <Wrapper>
+        <SearchWrapper>
+          <StyledInputBase
+            placeholder='검색어를 입력하세요.'
+            inputProps={{ 'aria-label': 'search' }}
+            color='secondary'
+          />
+          <Button color='secondary' variant='outlined'>
+            검색
+          </Button>
+        </SearchWrapper>
+        <Button
+          variant='contained'
+          onClick={() => {
+            router.push('/post');
+          }}
+        >
+          글쓰기
+        </Button>
+      </Wrapper>
     </>
   );
 };

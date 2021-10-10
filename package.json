@@ -32,6 +32,8 @@
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/eslint-parser": "^7.12.1",
     "@types/react": "17.0.21",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",

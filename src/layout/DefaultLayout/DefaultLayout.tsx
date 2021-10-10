@@ -9,7 +9,7 @@ import {
   InfoSection,
   SideSection,
 } from './DefaultLayoutStyles';
-import Theme from '../../../styles/Theme';
+import Theme from '../../styles/Theme';
 
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
