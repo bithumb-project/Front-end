@@ -5,6 +5,7 @@ import { PaginationProps } from '../../types/newsTypes';
 
 const NewsPagination: React.FC<PaginationProps> = ({pageCounter, page}) => {
   const router = useRouter();
+  
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     router.push(`/news/${value}`);
   };
