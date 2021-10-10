@@ -1,10 +1,7 @@
 import React from 'react';
 import { useRouter } from "next/router";
 import { useGetNewsQuery } from '../../features/news/newsSlice';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Grid, Container, Box, CircularProgress} from '@mui/material';
 import NewsItem from '../../components/News/NewsItem';
 import NewsPagination from '../../components/News/NewsPagination';
 
@@ -12,10 +9,10 @@ const Page = () => {
   const router = useRouter();
   const { page } = router.query;
   const { data, isLoading } = useGetNewsQuery(String(page));
-  
+
   return (
     <>
-    {isLoading ? (
+      {isLoading ? (
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <CircularProgress />
       </Box>

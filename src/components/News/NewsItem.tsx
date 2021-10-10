@@ -1,21 +1,8 @@
-import React, { ReactNode } from 'react';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Skeleton from '@mui/material/Skeleton';
+import React from 'react';
+import { Grid, Box, Card, CardMedia, Typography, Skeleton } from '@mui/material';
+import { NewsItemProps } from '../../types/newsTypes';
 
-interface Props {
-  item: {
-    author: string;
-    title: string;
-    publishedAt: string;
-    url: string;
-    urlToImage: string;
-  }
-}
-const NewsItem: React.FC<Props> = ({item}) => {
+const NewsItem: React.FC<NewsItemProps> = ({item}) => {
   const { author, title, publishedAt, url, urlToImage } = item;
 
   const handleNewsClick = (event: React.MouseEvent<Element, MouseEvent>, url: string) => {
