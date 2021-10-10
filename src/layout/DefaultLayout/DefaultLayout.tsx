@@ -1,7 +1,8 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
 import Banners from '../../components/Banners/Banners';
 import Headers from '../../components/Headers/Headers';
 import TabMenu from '../../components/TabMenu/TabMenu';
+import UserBox from '../../components/UserBox/UserBox';
 import Grid from '@mui/material/Grid';
 import {
   InfoWrapper,
@@ -11,11 +12,19 @@ import {
 } from './DefaultLayoutStyles';
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
+import Link from 'next/link';
+import useAuth from '../../features/auth/authHooks';
 
 type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
+  const { isLoggedIn, loadUser } = useAuth();
+
+  useEffect(()=> {
+    if(!localStorage.getItem('loginUser')) return;
+    loadUser(localStorage.getItem('loginUser'));
+  }, []);
 
   const handleListItemClick = (
     event: MouseEvent<HTMLDivElement, MouseEvent>,
@@ -38,9 +47,14 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
           </InfoSection>
         </InfoWrapper>
         <SideSection>
-          <Button variant='outlined' fullWidth>
-            로그인
-          </Button>
+          { isLoggedIn ? (
+            <UserBox /> ): (
+            <Link href='/login'>
+              <Button variant='outlined' fullWidth>
+                로그인
+              </Button>
+            </Link>) 
+          }
           <List sx={{ border: '1px solid #929292' }}>
             <ListItemButton
               selected={selectedIndex === 0}
