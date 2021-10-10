@@ -28,10 +28,10 @@ const NewsItem: React.FC<NewsItemProps> = ({item}) => {
             />
           )}
           <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="body2">
+            <Typography gutterBottom variant="h6">
               {title}
             </Typography>
-            <Typography display="block" variant="caption" color="text.secondary">
+            <Typography display="block" variant="subtitle2" color="text.secondary">
               {author}
             </Typography>
             <Typography variant="caption" color="text.secondary">
