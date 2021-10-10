@@ -3,7 +3,6 @@ import { Table, TableCell, TableRow, TableBody } from '@mui/material';
 import { Wrapper, StyledPaper, StyledTableHead, StyledTableRow, CurrencyUnit, Diff, DiffPercent, KoreaPremium, KoreaPremiumPercent } from './CoinInfoStyles';
 import CoinTab from './CoinTab';
 
-
 const CoinInfo: React.FC = (props) => {
   const [toggleTable, setToggleTable] = useState<boolean>(false);
   const [currencyUnit, setCurrencyUnit] = useState<string>('BTC');

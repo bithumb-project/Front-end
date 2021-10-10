@@ -2,14 +2,9 @@ import React from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { CoinTabContainer, ArrowButton, CoinCollapse, ArrowButtonIcon, CoinBox } from './CoinTabStyles';
+import { CoinTabProps } from '../../types/coinInfoType';
 
-interface Props {
-  toggle: boolean;
-  toggleEvent: () => void;
-  clickEvent: (unit: string) => void;
-}
-
-const CoinTab: React.FC<Props> = ({toggle, toggleEvent, clickEvent}) => {
+const CoinTab: React.FC<CoinTabProps> = ({toggle, toggleEvent, clickEvent}) => {
   const [value, setValue] = React.useState('BTC');
   const coins = ['BTC', 'ETH', 'LTC', 'ETC', 'XRP', 'XLM', 'BCH', 'EOS', 'ADA', 'DOGE'];
 
@@ -17,6 +12,7 @@ const CoinTab: React.FC<Props> = ({toggle, toggleEvent, clickEvent}) => {
     setValue(newValue);
     clickEvent(newValue);
   };
+  
   return (
     <CoinTabContainer>
       <CoinBox sx={{ width: '100%' }}>
