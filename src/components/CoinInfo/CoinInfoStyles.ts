@@ -38,7 +38,17 @@ export const Diff = styled(TableCell)`
   color: #fb1e0c;
 `;
 
+export const DiffPercent = styled.span`
+  color: #fb1e0c;
+  margin-left: 8px;
+`;
+
 export const KoreaPremium = styled(TableCell)`
   text-align: right;
   color: #2b8f28;
+`;
+
+export const KoreaPremiumPercent = styled.span`
+  color: #2b8f28;
+  margin-left: 8px;
 `;

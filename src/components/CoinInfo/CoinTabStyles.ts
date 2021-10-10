@@ -7,6 +7,7 @@ export const CoinTabContainer = styled.div`
   align-items: center;
   width: 100%;
   justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.04);
 `;
 
 export const CoinBox = styled(Box)`
