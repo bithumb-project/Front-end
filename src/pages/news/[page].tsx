@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from "next/router";
-import { useGetNewsQuery } from '../../store/modules/newsSlice';
+import { useGetNewsQuery } from '../../features/news/newsSlice';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -12,7 +12,7 @@ const Page = () => {
   const router = useRouter();
   const { page } = router.query;
   const { data, isLoading } = useGetNewsQuery(String(page));
-
+  
   return (
     <>
     {isLoading ? (

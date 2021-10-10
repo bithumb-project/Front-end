@@ -10,7 +10,6 @@ import Container from '@mui/material/Container';
 import { BigAvatar, PersonAvatar, AddIconSmall, ImageUpload} from './SignUpFormStyles';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
-import { signUp } from '../../service/userApi';
 
 interface UserInputData {
   nickname: string;
@@ -36,13 +35,6 @@ const SignUpForm: React.FC = (props) => {
     event.preventDefault();
     if(handleComparePassword()) return;
     const {nickname, email, password} = userInputData;
-    dispatch(
-      signUp({
-        nickname,
-        email,
-        password,
-      })
-    );
   };
 
   const handleFileOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
