@@ -15,12 +15,16 @@ import ListSubheader from '@mui/material/ListSubheader';
 import CoinInfo from '../../components/CoinInfo/CoinInfo';
 import Link from 'next/link';
 import useAuth from '../../features/auth/authHooks';
+import { useRouter } from "next/router";
 
 type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
   const { isLoggedIn, loadUser } = useAuth();
+  const router = useRouter();
+  const { pathname } = router;
+  const authArray = ['/login', '/signup'];
 
   useEffect(()=> {
     if(!localStorage.getItem('loginUser')) return;
@@ -40,9 +44,12 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
       <Headers />
       <SectionWrapper>
         <InfoWrapper>
+          { authArray.includes(pathname) ? 
+          null : (
           <InfoSection>
             <CoinInfo />
           </InfoSection>
+          )}
           <InfoSection>
             <div>{children}</div>
           </InfoSection>
