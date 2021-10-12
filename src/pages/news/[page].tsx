@@ -4,7 +4,7 @@ import { useGetNewsQuery } from '../../features/news/newsSlice';
 import { Grid, Container, Box, CircularProgress} from '@mui/material';
 import NewsItem from '../../components/News/NewsItem';
 import NewsPagination from '../../components/News/NewsPagination';
-import { NewsContainer } from '../../styles/pages/newsStyles';
+import { Title, NewsContainer } from '../../styles/pages/newsStyles';
 
 const Page = () => {
   const router = useRouter();
@@ -13,6 +13,7 @@ const Page = () => {
 
   return (
     <>
+    <Title>코인뉴스</Title>
       {isLoading ? (
       <Box sx={{ display: 'flex', justifyContent: 'center' }}>
         <CircularProgress />
