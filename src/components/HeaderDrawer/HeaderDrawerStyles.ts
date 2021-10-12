@@ -8,7 +8,6 @@ export const ButtonStyle = styled(Button)`
   color: #ffffff;
   border-radius: 0;
   &:hover {
-    /* color: #fddb27; */
     background-color: #104b85;
   }
 `;
@@ -31,7 +30,6 @@ export const MenuItemStyle = styled(MenuItem)`
     border-bottom: 1px solid #1976d1;
   }
   &:hover {
-    /* color: #fddb27; */
     color: white;
     background-color: #1976d1;
   }

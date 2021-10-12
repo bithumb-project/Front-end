@@ -4,11 +4,14 @@ import { useRouter } from 'next/router';
 import {
   Banner,
   SearchWrapper,
+  LogoWrapper,
+  Logo,
   Wrapper,
   StyledInputBase,
 } from './BannerStyles';
 
-import { Button, Typography } from '@mui/material';
+import { Button } from '@mui/material';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import bannerImage from '../../assets/mainBanner.png';
 
 const Banners = () => {
@@ -16,15 +19,12 @@ const Banners = () => {
   return (
     <Wrapper>
       <SearchWrapper>
-        <Typography
-          variant='h6'
-          noWrap
-          component='div'
-          sx={{ cursor: 'pointer' }}
-          onClick={() => router.push('/')}
-        >
-          BITHUMBUP
-        </Typography>
+        <LogoWrapper>
+          <Logo variant='h6' noWrap onClick={() => router.push('/')}>
+            <MonetizationOnIcon style={{ marginRight: '5px' }} />
+            <div>BITHUMBUP</div>
+          </Logo>
+        </LogoWrapper>
         <StyledInputBase
           placeholder='검색어를 입력 해 주세요.'
           inputProps={{ 'aria-label': 'search' }}
