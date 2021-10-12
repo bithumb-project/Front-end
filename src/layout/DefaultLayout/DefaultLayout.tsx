@@ -42,7 +42,6 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
         <InfoWrapper>
           <InfoSection>
             <CoinInfo />
-            <h2>실시간 테이블 자리</h2>
           </InfoSection>
           <InfoSection>
             <div>{children}</div>
