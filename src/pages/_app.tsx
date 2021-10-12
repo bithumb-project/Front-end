@@ -4,8 +4,8 @@ import GlobalStyles from '../styles/GlobalStyles';
 import DefaultLayout from '../layout/DefaultLayout/DefaultLayout';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../styles/Theme';
-import { Provider } from 'react-redux';
 import { store } from '../app/store';
+import { Provider } from 'react-redux';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,5 +21,4 @@ function MyApp({ Component, pageProps }: AppProps) {
     </StylesProvider>
   );
 }
-
 export default MyApp;

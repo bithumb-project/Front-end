@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import styled from 'styled-components';
 
 export const SectionWrapper = styled.div`
@@ -9,19 +10,21 @@ export const SectionWrapper = styled.div`
 
 export const InfoWrapper = styled.div`
   & > div {
-    margin: 10px;
+    margin-bottom: 10px;
   }
 `;
 
 export const InfoSection = styled.div`
-  border: 1px solid red;
-  min-width: 828px;
+  width: 828px;
   margin-right: 10px;
 `;
 
 export const SideSection = styled.div`
-  border: 1px solid blue;
-  min-width: 200px;
   display: grid;
   grid-gap: 10px;
+  width: 200px;
+`;
+
+export const LoginButton = styled(Button)`
+  height: 44px;
 `;

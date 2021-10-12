@@ -1,17 +1,20 @@
-import { useState, MouseEvent, useEffect } from 'react';
+import { useState, MouseEvent } from 'react';
 import Banners from '../../components/Banners/Banners';
 import Headers from '../../components/Headers/Headers';
 import TabMenu from '../../components/TabMenu/TabMenu';
-import UserBox from '../../components/UserBox/UserBox';
-import Grid from '@mui/material/Grid';
+
 import {
   InfoWrapper,
   SectionWrapper,
   InfoSection,
-  SideSection
+  SideSection,
+  LoginButton,
 } from './DefaultLayoutStyles';
+import Theme from '../../styles/Theme';
+
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
+
 import CoinInfo from '../../components/CoinInfo/CoinInfo';
 import Link from 'next/link';
 import useAuth from '../../features/auth/authHooks';
@@ -22,6 +25,7 @@ type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
+
   const { isLoggedIn, loadUser } = useAuth();
   const router = useRouter();
   const { pathname } = router;
@@ -56,15 +60,10 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
           </InfoSection>
         </InfoWrapper>
         <SideSection>
-          { isLoggedIn ? (
-            <UserBox /> ): (
-            <Link href='/login'>
-              <Button variant='outlined' fullWidth>
-                로그인
-              </Button>
-            </Link>) 
-          }
-          <List sx={{ border: '1px solid #929292' }}>
+          <LoginButton variant='outlined' fullWidth>
+            로그인
+          </LoginButton>
+          <List sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}>
             <ListItemButton
               selected={selectedIndex === 0}
               onClick={(event: any) => handleListItemClick(event, 0)}
@@ -79,11 +78,11 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
             </ListItemButton>
           </List>
           <List
-            sx={{ border: '1px solid #929292' }}
+            sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}
             subheader={
               <ListSubheader
                 sx={{
-                  borderBottom: '1px solid #dadada',
+                  borderBottom: `1px solid ${Theme.palette.secondary.light}`,
                   fontWeight: 'bold',
                   background: '#f9f9f9 ',
                 }}

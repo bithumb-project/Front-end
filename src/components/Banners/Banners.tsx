@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Button, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import {
   Banner,
@@ -9,10 +9,11 @@ import {
   SearchIconWrapper,
 } from './BannerStyles';
 
+import { Button, Typography } from '@mui/material';
 import bannerImage from '../../assets/mainBanner.png';
-import SearchIcon from '@mui/icons-material/Search';
 
 const Banners = () => {
+  const router = useRouter();
   return (
     <Wrapper>
       <SearchWrapper>
@@ -20,11 +21,11 @@ const Banners = () => {
           variant='h6'
           noWrap
           component='div'
-          sx={{ display: { xs: 'none', sm: 'block' } }}
+          sx={{ display: { xs: 'none', sm: 'block' }, cursor: 'pointer' }}
+          onClick={() => router.push('/')}
         >
           BITHUMBUP
         </Typography>
-
         <StyledInputBase
           placeholder='검색어를 입력 해 주세요.'
           inputProps={{ 'aria-label': 'search' }}
