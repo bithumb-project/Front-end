@@ -1,38 +1,8 @@
-import { Button } from '@mui/material';
 import styled from 'styled-components';
 
 import { List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
 import Theme from '../../styles/Theme';
-
-export const SectionWrapper = styled.div`
-  min-width: 1440px;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-`;
-
-export const InfoWrapper = styled.div`
-  & > div {
-    margin-bottom: 10px;
-  }
-`;
-
-export const InfoSection = styled.div`
-  width: 828px;
-  margin-right: 10px;
-`;
-
-export const SideSection = styled.div`
-  display: grid;
-  grid-gap: 10px;
-  width: 200px;
-`;
-
-export const LoginButton = styled(Button)`
-  height: 44px;
-`;
 
 export const ListStyle = styled(List)`
   border: 1px solid ${Theme.palette.secondary.main};

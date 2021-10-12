@@ -15,7 +15,6 @@ import {
   ListItemButtonStyle,
   ListItemTextStyle,
 } from './DefaultLayoutStyles';
-import Theme from '../../styles/Theme';
 
 import Banners from '../../components/Banners/Banners';
 import Headers from '../../components/Headers/Headers';
@@ -23,8 +22,22 @@ import TabMenu from '../../components/TabMenu/TabMenu';
 import UserBox from '../../components/UserBox/UserBox';
 import CoinInfo from '../../components/CoinInfo/CoinInfo';
 import SideNews from '../../components/SideNews/SideNews';
+import Footer from '../../components/Footer/Footer';
 
 type props = { children: React.ReactNode };
+
+const hotKeywords = [
+  '쿠팡플레이',
+  '한국 이란',
+  '한국 이란 축구 중계',
+  '축구',
+  'EDG',
+  '10월 모의고사',
+  '파이트클럽',
+  '최성봉',
+  '설훈',
+  '최민정',
+];
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -61,6 +74,7 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
           <InfoSection>
             <div>{children}</div>
           </InfoSection>
+          <Footer />
         </InfoWrapper>
         <SideSection>
           {isLoggedIn ? (
@@ -89,6 +103,17 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
             </ListItemButtonStyle>
           </ListStyle>
           <SideNews />
+          <ListStyle
+            subheader={
+              <ListSubHeaderStyle>포털 인기 검색어</ListSubHeaderStyle>
+            }
+          >
+            {hotKeywords.map((element, index) => (
+              <ListItemButtonStyle>
+                <ListItemTextStyle primary={`${index + 1}위. ${element}`} />
+              </ListItemButtonStyle>
+            ))}
+          </ListStyle>
         </SideSection>
       </SectionWrapper>
     </>
