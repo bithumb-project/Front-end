@@ -8,6 +8,7 @@ import {
   SectionWrapper,
   InfoSection,
   SideSection,
+  LoginButton,
 } from './DefaultLayoutStyles';
 import Theme from '../../styles/Theme';
 
@@ -40,9 +41,9 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
           </InfoSection>
         </InfoWrapper>
         <SideSection>
-          <Button variant='outlined' fullWidth>
+          <LoginButton variant='outlined' fullWidth>
             로그인
-          </Button>
+          </LoginButton>
           <List sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}>
             <ListItemButton
               selected={selectedIndex === 0}
