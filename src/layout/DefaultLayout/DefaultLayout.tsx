@@ -15,10 +15,26 @@ import Theme from '../../styles/Theme';
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
 
+import CoinInfo from '../../components/CoinInfo/CoinInfo';
+import Link from 'next/link';
+import useAuth from '../../features/auth/authHooks';
+import { useRouter } from "next/router";
+import SideNews from '../../components/SideNews/SideNews';
+
 type props = { children: React.ReactNode };
 
 const DefaultLayout: React.FC<props> = ({ children }) => {
   const [selectedIndex, setSelectedIndex] = useState(1);
+
+  const { isLoggedIn, loadUser } = useAuth();
+  const router = useRouter();
+  const { pathname } = router;
+  const authArray = ['/login', '/signup'];
+
+  useEffect(()=> {
+    if(!localStorage.getItem('loginUser')) return;
+    loadUser(localStorage.getItem('loginUser'));
+  }, []);
 
   const handleListItemClick = (
     event: MouseEvent<HTMLDivElement, MouseEvent>,
@@ -33,9 +49,12 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
       <Headers />
       <SectionWrapper>
         <InfoWrapper>
+          { authArray.includes(pathname) ? 
+          null : (
           <InfoSection>
-            <h2>실시간 테이블 자리</h2>
+            <CoinInfo />
           </InfoSection>
+          )}
           <InfoSection>
             <div>{children}</div>
           </InfoSection>
@@ -85,33 +104,7 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
               <ListItemText primary='Inbox2' />
             </ListItemButton>
           </List>
-          <List
-            sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}
-            subheader={
-              <ListSubheader
-                sx={{
-                  borderBottom: `1px solid ${Theme.palette.secondary.light}`,
-                  fontWeight: 'bold',
-                  background: '#f9f9f9 ',
-                }}
-              >
-                코인뉴스
-              </ListSubheader>
-            }
-          >
-            <ListItemButton
-              selected={selectedIndex === 0}
-              onClick={(event: any) => handleListItemClick(event, 0)}
-            >
-              <ListItemText primary='Inbox' />
-            </ListItemButton>
-            <ListItemButton
-              selected={selectedIndex === 0}
-              onClick={(event: any) => handleListItemClick(event, 1)}
-            >
-              <ListItemText primary='Inbox2' />
-            </ListItemButton>
-          </List>
+          <SideNews />
         </SideSection>
       </SectionWrapper>
     </>

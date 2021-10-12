@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 import {
   AppBarStyle,
@@ -50,7 +51,9 @@ const Headers = () => {
             onClose={handleClose}
           >
             <MenuItemStyle onClick={handleClose}>코인정보</MenuItemStyle>
-            <MenuItemStyle onClick={handleClose}>코인뉴스</MenuItemStyle>
+            <Link href='/news/1'>
+              <MenuItemStyle onClick={handleClose}>코인뉴스</MenuItemStyle>
+            </Link>
             <MenuItemStyle onClick={handleClose}>채굴정보</MenuItemStyle>
             <MenuItemStyle onClick={handleClose}>채굴게시판</MenuItemStyle>
             <MenuItemStyle onClick={handleClose}>채굴기장터</MenuItemStyle>

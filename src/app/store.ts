@@ -1,4 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
+import authSlice from '../features/auth/authSlice';
+import { newsApi } from '../features/news/newsSlice';
 import { postsSliceApi } from '../features/posts/postsSlice';
 import postsReducer from '../features/posts/postsReducer';
 import { usersSliceApi } from '../features/users/usersSlice';
@@ -12,12 +14,15 @@ export const store = configureStore({
     [postsSliceApi.reducerPath]: postsSliceApi.reducer,
     [usersSliceApi.reducerPath]: usersSliceApi.reducer,
     [commentsSliceApi.reducerPath]: commentsSliceApi.reducer,
+    auth: authSlice,
+    [newsApi.reducerPath]: newsApi.reducer
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(
       postsSliceApi.middleware,
       usersSliceApi.middleware,
-      commentsSliceApi.middleware
+      commentsSliceApi.middleware,
+      newsApi.middleware
     );
   },
 });
