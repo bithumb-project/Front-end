@@ -21,7 +21,7 @@ const Banners = () => {
           variant='h6'
           noWrap
           component='div'
-          sx={{ display: { xs: 'none', sm: 'block' }, cursor: 'pointer' }}
+          sx={{ cursor: 'pointer' }}
           onClick={() => router.push('/')}
         >
           BITHUMBUP

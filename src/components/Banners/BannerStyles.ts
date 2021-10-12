@@ -28,12 +28,3 @@ export const StyledInputBase = styled(InputBase)`
     width: 100%;
   }
 `;
-
-export const SearchIconWrapper = styled.div`
-  height: 100%;
-  position: absolute;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
