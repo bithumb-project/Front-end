@@ -5,6 +5,7 @@ import { Grid, Container, Box, CircularProgress} from '@mui/material';
 import NewsItem from '../../components/News/NewsItem';
 import NewsPagination from '../../components/News/NewsPagination';
 import { NewsContainer } from '../../styles/pages/newsStyles';
+
 const Page = () => {
   const router = useRouter();
   const { page } = router.query;
