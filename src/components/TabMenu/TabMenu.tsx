@@ -1,5 +1,5 @@
 import { SyntheticEvent, useState } from 'react';
-import { Wrapper, TabStyle, TabsStyle, TabBox } from './TabMenuStyles';
+import { Wrapper, TabStyle, TabsStyle } from './TabMenuStyles';
 import HomeIcon from '@mui/icons-material/Home';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
@@ -20,6 +20,7 @@ const TabMenu = () => {
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
 
   const Native = () => {
     return (

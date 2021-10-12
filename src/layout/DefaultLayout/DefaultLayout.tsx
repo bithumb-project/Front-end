@@ -12,6 +12,7 @@ import {
 } from './DefaultLayoutStyles';
 import { Button, List, ListItemButton, ListItemText } from '@mui/material';
 import ListSubheader from '@mui/material/ListSubheader';
+import CoinInfo from '../../components/CoinInfo/CoinInfo';
 import Link from 'next/link';
 import useAuth from '../../features/auth/authHooks';
 
@@ -40,6 +41,7 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
       <SectionWrapper>
         <InfoWrapper>
           <InfoSection>
+            <CoinInfo />
             <h2>실시간 테이블 자리</h2>
           </InfoSection>
           <InfoSection>
