@@ -89,3 +89,12 @@ export const SeparationLine = styled.div`
   border-top: 1px dashed ${Theme.palette.secondary.light};
   margin: 18px 10px;
 `;
+
+export const RedoButtonWrapper = styled(Button)`
+  display: flex;
+  margin-left: auto;
+  padding: 10px 0;
+  & > * {
+    margin-left: 10px;
+  }
+`;

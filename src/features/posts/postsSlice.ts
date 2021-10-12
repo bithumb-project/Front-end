@@ -36,9 +36,19 @@ export const postsSliceApi = createApi({
           body: patch.updateBody,
         }),
       }),
+      deletePost: builder.mutation<Data, any>({
+        query: (id) => ({
+          url: `posts/${id}`,
+          method: 'DELETE',
+        }),
+      }),
     };
   },
 });
 
-export const { useGetPostsQuery, usePutPostMutation, useGetPostQuery } =
-  postsSliceApi;
+export const {
+  useGetPostsQuery,
+  usePutPostMutation,
+  useGetPostQuery,
+  useDeletePostMutation,
+} = postsSliceApi;

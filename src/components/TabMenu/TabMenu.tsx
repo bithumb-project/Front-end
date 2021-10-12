@@ -1,4 +1,6 @@
 import { SyntheticEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+
 import { Wrapper, TabStyle, TabsStyle } from './TabMenuStyles';
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -12,6 +14,8 @@ import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
 
 const TabMenu = () => {
+  const router = useRouter();
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -21,7 +25,11 @@ const TabMenu = () => {
   return (
     <Wrapper>
       <TabsStyle value={value} onChange={handleChange}>
-        <TabStyle icon={<HomeIcon />} label='홈으로' />
+        <TabStyle
+          icon={<HomeIcon />}
+          onClick={() => router.push('/')}
+          label='홈으로'
+        />
         <TabStyle icon={<FavoriteIcon />} label='즐겨찾기 추가' />
         <TabStyle icon={<AddCircleIcon />} label='시작페이지 설정' />
         <TabStyle icon={<DarkModeIcon />} label='야간모드' />

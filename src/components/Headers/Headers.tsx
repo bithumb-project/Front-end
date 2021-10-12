@@ -79,7 +79,14 @@ const Headers = () => {
             open={element === 'menu3' && open}
             onClose={handleClose}
           >
-            <MenuItemStyle onClick={handleClose}>자유게시판</MenuItemStyle>
+            <MenuItemStyle
+              onClick={() => {
+                setAnchorEl(null);
+                router.push('/board');
+              }}
+            >
+              자유게시판
+            </MenuItemStyle>
             <MenuItemStyle onClick={handleClose}>손익인증 게시판</MenuItemStyle>
             <MenuItemStyle onClick={handleClose}>질문/답변</MenuItemStyle>
             <MenuItemStyle onClick={handleClose}>유머/감동</MenuItemStyle>

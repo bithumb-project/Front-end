@@ -44,12 +44,9 @@ const Index = () => {
   );
 
   const { data: postsData } = useGetPostsQuery();
-  console.log('🚀 ~ file: index.tsx ~ line 35 ~ Index ~ postsData', postsData);
 
   const count =
     postsData && postsData?.filter((element) => element.id === Number(id))[0];
-
-  console.log('jhi', count);
 
   useEffect(() => {
     dispatch(recommendCount(count?.recommend));
@@ -60,6 +57,18 @@ const Index = () => {
   const recommend = useAppSelector(({ postsState }) => postsState.recommend);
   const blame = useAppSelector(({ postsState }) => postsState.blame);
   const declare = useAppSelector(({ postsState }) => postsState.declare);
+
+  const handleDeclare = () => {
+    if (declare === true) alert('이미 신고되었습니다.');
+    if (declare === false) {
+      const checkConfirm = confirm('정말로 신고하시겠습니까?');
+
+      if (checkConfirm === false) {
+        return;
+      }
+      dispatch(isDeclare(true));
+    }
+  };
 
   return (
     <>
@@ -114,9 +123,7 @@ const Index = () => {
               variant='outlined'
               color='error'
               startIcon={<WbTwilightIcon />}
-              onClick={() => {
-                dispatch(isDeclare(true));
-              }}
+              onClick={handleDeclare}
             >
               신고 {declare ? 1 : 0}
             </PostButton>
