@@ -6,7 +6,6 @@ import {
   SearchWrapper,
   Wrapper,
   StyledInputBase,
-  SearchIconWrapper,
 } from './BannerStyles';
 
 import { Button, Typography } from '@mui/material';
