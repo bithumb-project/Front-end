@@ -74,7 +74,7 @@ const LoginForm:React.FC = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Login
+            로그인
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
