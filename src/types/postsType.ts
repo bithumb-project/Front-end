@@ -5,6 +5,14 @@ export interface Response {
   body?: string;
 }
 
+export interface PhotoResponse {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+}
+
 interface TransformedResponse extends Response {
   view?: number;
   recommend?: number;
@@ -15,3 +23,5 @@ interface TransformedResponse extends Response {
 export type PostsResponse = Response[];
 
 export type TransformedPostsResponse = TransformedResponse[];
+
+export type PhotoPostsResponse = PhotoResponse[];

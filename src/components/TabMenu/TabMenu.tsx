@@ -10,12 +10,12 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import NativeSelect from '@mui/material/NativeSelect';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 import useAuth from '../../features/auth/authHooks';
 
 const TabMenu = () => {
   const [value, setValue] = useState(0);
-  const [authState, setAuthState] = useState(0)
+  const [authState, setAuthState] = useState(0);
   const { isLoggedIn, logout } = useAuth();
   const router = useRouter();
 
@@ -41,7 +41,7 @@ const TabMenu = () => {
           <option value={4}>中文(臺灣)</option>
         </NativeSelect>
       </FormControl>
-    )
+    );
   };
 
   return (
@@ -52,15 +52,23 @@ const TabMenu = () => {
         <TabStyle icon={<AddCircleIcon />} label='시작페이지 설정' />
         <TabStyle icon={<DarkModeIcon />} label='야간모드' />
       </TabsStyle>
-      { isLoggedIn ? (
+      {isLoggedIn ? (
         <TabsStyle value={authState} onChange={handleAuthStateChange}>
           <TabStyle icon={<LogoutIcon />} label='로그아웃' onClick={logout} />
           <Native />
         </TabsStyle>
       ) : (
         <TabsStyle value={authState} onChange={handleAuthStateChange}>
-          <TabStyle icon={<LoginIcon />} label='로그인' onClick={() => router.push('/login')} />
-          <TabStyle icon={<PermIdentityIcon />} label='회원가입' onClick={() => router.push('/signup')}/>
+          <TabStyle
+            icon={<LoginIcon />}
+            label='로그인'
+            onClick={() => router.push('/login')}
+          />
+          <TabStyle
+            icon={<PermIdentityIcon />}
+            label='회원가입'
+            onClick={() => router.push('/signup')}
+          />
           <Native />
         </TabsStyle>
       )}

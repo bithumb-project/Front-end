@@ -22,10 +22,6 @@ const Comments = ({ id }: { id: string }) => {
   const dispatch = useAppDispatch();
 
   const { data: comment, isLoading } = useGetCommentQuery(id);
-  console.log(
-    '🚀 ~ file: Comments.tsx ~ line 23 ~ Comments ~ comment',
-    comment
-  );
 
   useEffect(() => {
     if (comment) {

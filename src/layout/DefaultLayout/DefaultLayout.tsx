@@ -1,8 +1,8 @@
 import { useEffect, useState, MouseEvent } from 'react';
-import Banners from '../../components/Banners/Banners';
-import Headers from '../../components/Headers/Headers';
-import TabMenu from '../../components/TabMenu/TabMenu';
-import UserBox from '../../components/UserBox/UserBox';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+
+import useAuth from '../../features/auth/authHooks';
 
 import {
   InfoWrapper,
@@ -10,22 +10,37 @@ import {
   InfoSection,
   SideSection,
   LoginButton,
+  ListStyle,
+  ListSubHeaderStyle,
+  ListItemButtonStyle,
+  ListItemTextStyle,
 } from './DefaultLayoutStyles';
-import Theme from '../../styles/Theme';
 
-import { Button, List, ListItemButton, ListItemText } from '@mui/material';
-import ListSubheader from '@mui/material/ListSubheader';
-
+import Banners from '../../components/Banners/Banners';
+import Headers from '../../components/Headers/Headers';
+import TabMenu from '../../components/TabMenu/TabMenu';
+import UserBox from '../../components/UserBox/UserBox';
 import CoinInfo from '../../components/CoinInfo/CoinInfo';
-import Link from 'next/link';
-import useAuth from '../../features/auth/authHooks';
-import { useRouter } from 'next/router';
 import SideNews from '../../components/SideNews/SideNews';
+import Footer from '../../components/Footer/Footer';
 
 type props = { children: React.ReactNode };
 
+const hotKeywords = [
+  '쿠팡플레이',
+  '한국 이란',
+  '한국 이란 축구 중계',
+  '축구',
+  'EDG',
+  '10월 모의고사',
+  '파이트클럽',
+  '최성봉',
+  '설훈',
+  '최민정',
+];
+
 const DefaultLayout: React.FC<props> = ({ children }) => {
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const { isLoggedIn, loadUser } = useAuth();
   const router = useRouter();
@@ -43,6 +58,7 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
   ) => {
     setSelectedIndex(index);
   };
+
   return (
     <>
       <TabMenu />
@@ -58,6 +74,7 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
           <InfoSection>
             <div>{children}</div>
           </InfoSection>
+          <Footer />
         </InfoWrapper>
         <SideSection>
           {isLoggedIn ? (
@@ -69,48 +86,34 @@ const DefaultLayout: React.FC<props> = ({ children }) => {
               </LoginButton>
             </Link>
           )}
-          <List sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}>
-            <ListItemButton
-              selected={selectedIndex === 0}
-              onClick={(event: any) => handleListItemClick(event, 0)}
-            >
-              <ListItemText primary='Inbox' />
-            </ListItemButton>
-            <ListItemButton
-              selected={selectedIndex === 0}
+          <ListStyle
+            subheader={<ListSubHeaderStyle>공지사항</ListSubHeaderStyle>}
+          >
+            <ListItemButtonStyle
+              selected={selectedIndex === 1}
               onClick={(event: any) => handleListItemClick(event, 1)}
             >
-              <ListItemText primary='Inbox2' />
-            </ListItemButton>
-          </List>
-          <List
-            sx={{ border: `1px solid ${Theme.palette.secondary.main}` }}
+              <ListItemTextStyle primary='포털 인기 검색어 순위가 추가되었습니다.' />
+            </ListItemButtonStyle>
+            <ListItemButtonStyle
+              selected={selectedIndex === 2}
+              onClick={(event: any) => handleListItemClick(event, 2)}
+            >
+              <ListItemTextStyle primary='시세표에 플로우(FLOW)와 밀크(MLK)가 추가되었습니다.' />
+            </ListItemButtonStyle>
+          </ListStyle>
+          <SideNews />
+          <ListStyle
             subheader={
-              <ListSubheader
-                sx={{
-                  borderBottom: `1px solid ${Theme.palette.secondary.light}`,
-                  fontWeight: 'bold',
-                  background: '#f9f9f9 ',
-                }}
-              >
-                공지사항
-              </ListSubheader>
+              <ListSubHeaderStyle>포털 인기 검색어</ListSubHeaderStyle>
             }
           >
-            <ListItemButton
-              selected={selectedIndex === 0}
-              onClick={(event: any) => handleListItemClick(event, 0)}
-            >
-              <ListItemText primary='Inbox' />
-            </ListItemButton>
-            <ListItemButton
-              selected={selectedIndex === 0}
-              onClick={(event: any) => handleListItemClick(event, 1)}
-            >
-              <ListItemText primary='Inbox2' />
-            </ListItemButton>
-          </List>
-          <SideNews />
+            {hotKeywords.map((element, index) => (
+              <ListItemButtonStyle>
+                <ListItemTextStyle primary={`${index + 1}위. ${element}`} />
+              </ListItemButtonStyle>
+            ))}
+          </ListStyle>
         </SideSection>
       </SectionWrapper>
     </>

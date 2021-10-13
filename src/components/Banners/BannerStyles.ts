@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { InputBase, TextField } from '@mui/material';
+import { InputBase, Typography } from '@mui/material';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -9,11 +9,20 @@ export const Wrapper = styled.div`
   height: 72px;
 `;
 
+export const LogoWrapper = styled.div``;
+
+export const Logo = styled(Typography)`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const SearchWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 245px;
+  margin-right: 220px;
 `;
 
 export const Banner = styled.div`
@@ -27,13 +36,4 @@ export const StyledInputBase = styled(InputBase)`
   & .MuiInputBase-input {
     width: 100%;
   }
-`;
-
-export const SearchIconWrapper = styled.div`
-  height: 100%;
-  position: absolute;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;

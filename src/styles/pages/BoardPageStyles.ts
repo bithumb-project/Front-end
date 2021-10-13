@@ -5,7 +5,7 @@ import Theme from '../Theme';
 export const Title = styled.h2`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 15px;
+  margin: 20px 0;
 `;
 
 export const StyledInputBase = styled(InputBase)`
