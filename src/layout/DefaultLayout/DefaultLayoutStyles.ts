@@ -25,9 +25,13 @@ export const InfoSection = styled.div`
 `;
 
 export const SideSection = styled.div`
-  display: grid;
-  grid-gap: 10px;
+  display: flex;
+  flex-direction: column;
   width: 200px;
+
+  & > *:not(:first-child) {
+    margin-top: 20px;
+  }
 `;
 
 export const LoginButton = styled(Button)`

@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   justify-content: space-around;
   flex-direction: row;
   width: 1440px;
+  padding-top: 15px;
 
   @media screen and (min-width: 1441px) {
     margin: 0 auto;

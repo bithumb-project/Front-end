@@ -36,7 +36,7 @@ const Board = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const { data: postsData, isLoading, refetch } = useGetPostsQuery();
+  const { data: postsData, isLoading } = useGetPostsQuery();
   const { data: userData } = useGetUsersQuery();
 
   const [page, setPage] = useState(0);

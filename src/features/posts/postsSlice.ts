@@ -3,6 +3,7 @@ import {
   TransformedPostsResponse,
   PostsResponse,
   Response,
+  PhotoPostsResponse,
 } from '../../types/postsType';
 
 type Data = TransformedPostsResponse;
@@ -29,6 +30,9 @@ export const postsSliceApi = createApi({
       getPost: builder.query<Response, string>({
         query: (id) => `/posts/${id}`,
       }),
+      getPhotoPost: builder.query<PhotoPostsResponse, void>({
+        query: () => '/photos',
+      }),
       putPost: builder.mutation<Data, any>({
         query: ({ id, ...patch }) => ({
           url: `posts/${id}`,
@@ -47,6 +51,7 @@ export const postsSliceApi = createApi({
 });
 
 export const {
+  useGetPhotoPostQuery,
   useGetPostsQuery,
   usePutPostMutation,
   useGetPostQuery,
