@@ -94,6 +94,9 @@ export const RedoButtonWrapper = styled(Button)`
   display: flex;
   margin-left: auto;
   padding: 10px 0;
+  &:hover {
+    background-color: transparent;
+  }
   & > * {
     margin-left: 10px;
   }

@@ -39,8 +39,8 @@ const Headers = () => {
     <BoxStyle>
       <AppBarStyle>
         <LayoutStyle>
-          <ButtonStyle>
-            <HomeIcon onClick={() => router.push('/')} />
+          <ButtonStyle onClick={() => router.push('/')}>
+            <HomeIcon />
           </ButtonStyle>
           <ButtonStyle onClick={(e) => handleClick(e, 'menu1')}>
             코인판

@@ -31,11 +31,7 @@ import {
   recommendCount,
 } from '../features/posts/postsReducer';
 
-import {
-  getHundredsRandomNumber,
-  getTenRandomNumber,
-  getToday,
-} from '../utils/Date';
+import { getTenRandomNumber, getToday } from '../utils/Date';
 
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
@@ -65,7 +61,7 @@ const post = () => {
   const { data: post, isLoading } = useGetPostQuery(String(id));
 
   useEffect(() => {
-    dispatch(addPostData({ id: getHundredsRandomNumber, userId: id }));
+    dispatch(addPostData({ id: 101, userId: 11 }));
   }, []);
 
   useEffect(() => {
@@ -123,9 +119,9 @@ const post = () => {
 
   return (
     <div>
-      <Title>새로운 글 작성하기</Title>
       {!isSuccess && (
         <>
+          <Title>새로운 글 작성하기</Title>
           <AddTitle
             aria-label='제목'
             minRows={3}

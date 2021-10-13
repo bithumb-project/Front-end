@@ -1,5 +1,11 @@
 import React from 'react';
-import {  List, ListSubheader, ListItemButton, CircularProgress, Box } from '@mui/material';
+import {
+  List,
+  ListSubheader,
+  ListItemButton,
+  CircularProgress,
+  Box,
+} from '@mui/material';
 import { useGetNewsQuery } from '../../features/news/newsSlice';
 import { NewsItemText } from './SideNewsStyles';
 
@@ -8,9 +14,9 @@ const SideNews: React.FC = (props) => {
 
   return (
     <List
-      sx={{ 
+      sx={{
         maxWidth: '200px',
-        border: '1px solid #929292' 
+        border: '1px solid #929292',
       }}
       subheader={
         <ListSubheader
@@ -24,23 +30,17 @@ const SideNews: React.FC = (props) => {
         </ListSubheader>
       }
     >
-    {newsData ? 
-      newsData?.map((article, idx) => (
-          <ListItemButton 
+      {newsData &&
+        newsData?.map((article, idx) => (
+          <ListItemButton
             key={idx}
             onClick={(event: any) => window.open(article.url, '_blank')}
           >
             <NewsItemText primary={article.title} />
           </ListItemButton>
-      )
-      ) : (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <CircularProgress size='30px'/>
-        </Box>
-      )
-    }
+        ))}
     </List>
-    );
-}
+  );
+};
 
 export default SideNews;
